@@ -33,12 +33,12 @@ COPY php.ini /usr/local/etc/php/php.ini
 COPY php-fpm-pool.conf 	/usr/local/etc/php/pool.d/www.conf
 
 # Install Composer
-RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls --version=2.2.5 && \
+RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls --version=2.4.1 && \
 mv composer.phar /usr/local/bin/composer
 
 # Install Symfony CLI
 RUN	wget https://get.symfony.com/cli/installer -O - | bash && \
-    mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+    mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
 # Install xdebug
 RUN docker-php-source extract
