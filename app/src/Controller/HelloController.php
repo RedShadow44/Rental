@@ -18,6 +18,8 @@ class HelloController extends AbstractController
     /**
      * Index action.
      *
+     * @param string $name User input
+     *
      * @return Response HTTP response
      */
     #[Route(
