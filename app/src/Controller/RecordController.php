@@ -20,19 +20,37 @@ class RecordController extends AbstractController
         name: 'record_index',
         methods: 'GET'
     )]
-    public function index(RecordRepository $repository): Response {
+    /**
+     * Index action.
+     *
+     * @param RecordRepository $repository Record repository
+     *
+     * @return Response HTTP response
+     */
+    public function index(RecordRepository $repository): Response
+    {
         $records = $repository->findAll();
+
         return $this->render(
             'record/index.html.twig',
             ['records' => $records]
         );
-}
+    }
+
     #[Route(
         '/{id}',
         name: 'record_show',
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
+    /**
+     * Show action.
+     *
+     * @param RecordRepository $repository Record repository
+     * @param int              $id         Record identifier
+     *
+     * @return Response HTTP response
+     */
     public function show(RecordRepository $repository, int $id): Response
     {
         $record = $repository->findOneById($id);

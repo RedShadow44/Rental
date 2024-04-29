@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.record_list'|trans }}
+    Records list
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.record_list'|trans }}</h1>
+    <h1>Records list</h1>
     {% if records is defined and records|length %}
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ 'label.id'|trans }}</th>
-                <th>{{ 'label.title'|trans }}</th>
-                <th>{{ 'label.content'|trans }}</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Tags</th>
                 <th scope="col">
-                    {{ 'label.actions'|trans }}
+                    Actions
                 </th>
             </tr>
             </thead>
@@ -31,7 +31,7 @@
         </table>
     {% else %}
         <p>
-            {{ 'message.empty_list'|trans }}
+            List is empty.
         </p>
     {% endif %}
 {% endblock  %}
