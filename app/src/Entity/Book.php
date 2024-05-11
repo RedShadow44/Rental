@@ -49,6 +49,15 @@ class Book
     private ?string $description = null;
 
     /**
+     * Category.
+     *
+     * @var Category
+     */
+    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
+    /**
      * Getter for Id.
      *
      * @return int|null Id
@@ -117,5 +126,25 @@ class Book
     public function setDescription(?string $description): void
     {
         $this->description = $description;
+    }
+    /**
+     * Getter for category.
+     *
+     * @return Category|null Category
+     */
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+    /**
+     * Setter for category.
+     *
+     * @param Category|null $category Category
+     */
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

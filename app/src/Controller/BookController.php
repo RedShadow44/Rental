@@ -22,7 +22,6 @@ class BookController extends AbstractController
     /**
      * Index action.
      *
-     * @param Request            $request        HTTP Request
      * @param BookRepository     $bookRepository Book repository
      * @param PaginatorInterface $paginator      Paginator
      *
@@ -32,7 +31,7 @@ class BookController extends AbstractController
         name: 'book_index',
         methods: 'GET'
     )]
-    public function index(BookRepository $bookRepository, PaginatorInterface $paginator,#[MapQueryParameter] int $page = 1 ): Response
+    public function index(BookRepository $bookRepository, PaginatorInterface $paginator, #[MapQueryParameter] int $page = 1): Response
     {
         $pagination = $paginator->paginate(
             $bookRepository->queryAll(),

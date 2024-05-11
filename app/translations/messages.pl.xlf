@@ -50,6 +50,10 @@
         <source>message.record_not_found</source>
         <target>Nie znaleziono rekordu</target>
      </trans-unit>
+     <trans-unit id="label.category">
+        <source>label.category</source>
+        <target>Kategoria</target>
+     </trans-unit>
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

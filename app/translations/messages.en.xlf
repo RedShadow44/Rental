@@ -50,11 +50,15 @@
         <source>message.record_not_found</source>
         <target>Record not found</target>
      </trans-unit>
+     <trans-unit id="label.category">
+        <source>label.category</source>
+        <target>Category</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->
 <!--      </trans-unit> -->
-
 
     </body>
   </file>
