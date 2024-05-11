@@ -19,7 +19,8 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'book.title') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.author'|trans, 'book.author') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.description'|trans, 'book.description') }}</th>
-                <th>{{ 'label.category'|trans }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
+
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>

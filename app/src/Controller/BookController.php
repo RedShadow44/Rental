@@ -6,11 +6,12 @@
 namespace App\Controller;
 
 use App\Entity\Book;
-use App\Repository\BookRepository;
-use Knp\Component\Pager\PaginatorInterface;
+use App\Service\BookService;
+use App\Service\BookServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
@@ -19,11 +20,19 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/book')]
 class BookController extends AbstractController
 {
+
+    /**
+     * Constructor.
+     */
+    public function __construct(private readonly BookServiceInterface $bookService)
+    {
+
+    }
+
     /**
      * Index action.
      *
-     * @param BookRepository     $bookRepository Book repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param int $page Page number
      *
      * @return Response HTTP response
      */
@@ -31,13 +40,9 @@ class BookController extends AbstractController
         name: 'book_index',
         methods: 'GET'
     )]
-    public function index(BookRepository $bookRepository, PaginatorInterface $paginator, #[MapQueryParameter] int $page = 1): Response
+    public function index(#[MapQueryParameter] int $page = 1): Response
     {
-        $pagination = $paginator->paginate(
-            $bookRepository->queryAll(),
-            $page,
-            BookRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
+        $pagination = $this->bookService->getPaginatedList($page);
 
         return $this->render('book/index.html.twig', ['pagination' => $pagination]);
     }
