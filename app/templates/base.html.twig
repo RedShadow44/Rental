@@ -17,16 +17,21 @@
 <main role="main" class="container-fluid">
 {#    {% include 'default/_nav.html.twig' %}#}
 {#    {% include 'default/_flash_messages.html.twig' %}#}
+{#    <div class="container-fluid">#}
+{#        {% for type, messages in app.session.flashBag.all %}#}
+{#            {% for message in messages %}#}
+{#                <div class="alert alert-{{ type }}" role="alert">#}
+{#                    {{ message }}#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        {% endfor %}#}
+{#        {% block body %}{% endblock %}#}
+{#    </div>#}
     <div class="container-fluid">
-        {% for type, messages in app.session.flashBag.all %}
-            {% for message in messages %}
-                <div class="alert alert-{{ type }}" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
+        {% include 'default/_flash_messages.html.twig' %}
         {% block body %}{% endblock %}
     </div>
+
 
 </main>
 {#{% include 'default/_footer.html.twig' %}#}
