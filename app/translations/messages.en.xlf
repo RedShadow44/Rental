@@ -55,6 +55,71 @@
         <target>Category</target>
      </trans-unit>
 
+     <trans-unit id="title.category_list">
+        <source>title.category_list</source>
+        <target>Category list</target>
+     </trans-unit>
+
+     <trans-unit id="label.created_at">
+        <source>label.created_at</source>
+        <target>CreatedAt</target>
+     </trans-unit>
+
+     <trans-unit id="label.updated_at">
+        <source>label.updated_at</source>
+        <target>UpdatedAt</target>
+     </trans-unit>
+
+     <trans-unit id="action.edit">
+        <source>action.edit</source>
+        <target>Edit</target>
+     </trans-unit>
+
+     <trans-unit id="action.delete">
+        <source>action.delete</source>
+        <target>Delete</target>
+     </trans-unit>
+
+     <trans-unit id="action.create">
+        <source>action.create</source>
+        <target>Create new category</target>
+     </trans-unit>
+
+     <trans-unit id="title.category_create">
+        <source>title.category_create</source>
+        <target>Create category</target>
+     </trans-unit>
+
+     <trans-unit id="action.save">
+        <source>action.save</source>
+        <target>Save</target>
+     </trans-unit>
+
+     <trans-unit id="title.category_details">
+        <source>title.category_details</source>
+        <target>Category Details</target>
+     </trans-unit>
+
+     <trans-unit id="title.category_edit">
+        <source>title.category_edit</source>
+        <target>Category Edit</target>
+     </trans-unit>
+
+     <trans-unit id="title.category_delete">
+        <source>title.category_delete</source>
+        <target>Category Delete</target>
+     </trans-unit>
+
+     <trans-unit id="message.created_successfully">
+        <source>message.created_successfully</source>
+        <target>Success</target>
+     </trans-unit>
+
+     <trans-unit id="message.deleted_successfully">
+        <source>message.deleted_successfully</source>
+        <target>Success</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

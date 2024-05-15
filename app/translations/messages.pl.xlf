@@ -54,6 +54,71 @@
         <source>label.category</source>
         <target>Kategoria</target>
      </trans-unit>
+
+     <trans-unit id="title.category_list">
+        <source>title.category_list</source>
+        <target>Lista kategorii</target>
+     </trans-unit>
+
+     <trans-unit id="label.created_at">
+        <source>label.created_at</source>
+        <target>Utworzone</target>
+     </trans-unit>
+
+     <trans-unit id="label.updated_at">
+        <source>label.updated_at</source>
+        <target>Zmienione</target>
+     </trans-unit>
+
+     <trans-unit id="action.edit">
+        <source>action.edit</source>
+        <target>Edytuj</target>
+     </trans-unit>
+
+     <trans-unit id="action.delete">
+        <source>action.delete</source>
+        <target>Usuń</target>
+     </trans-unit>
+
+     <trans-unit id="action.create">
+        <source>action.create</source>
+        <target>Stwórz nową kategorie</target>
+     </trans-unit>
+
+     <trans-unit id="title.category_create">
+        <source>title.category_create</source>
+        <target>Stwórz kategorie</target>
+     </trans-unit>
+
+     <trans-unit id="action.save">
+        <source>action.save</source>
+        <target>Zapisz</target>
+     </trans-unit>
+
+     <trans-unit id="title.category_details">
+        <source>title.category_details</source>
+        <target>Szczegóły kategorii</target>
+     </trans-unit>
+
+     <trans-unit id="title.category_edit">
+        <source>title.category_edit</source>
+        <target>Edytuj kategorie</target>
+     </trans-unit>
+
+     <trans-unit id="title.category_delete">
+        <source>title.category_delete</source>
+        <target>Usuń kategorie</target>
+     </trans-unit>
+
+     <trans-unit id="message.created_successfully">
+        <source>message.created_successfully</source>
+        <target>Sukces</target>
+     </trans-unit>
+
+     <trans-unit id="message.deleted_successfully">
+        <source>message.deleted_successfully</source>
+        <target>Sukces</target>
+     </trans-unit>
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->
