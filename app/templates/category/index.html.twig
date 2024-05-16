@@ -29,8 +29,8 @@
             {% for category in pagination.items %}
                 <tr>
                     <td>{{ category.id }}</td>
-                    <td>{{ category.createdAt|date('Y/m/d') }}</td>
-                    <td>{{ category.updatedAt|date('Y/m/d') }}</td>
+                    <td>{{ category.createdAt|format_date('long') }}</td>
+                    <td>{{ category.updatedAt|format_date('long') }}</td>
                     <td>{{ category.title }}</td>
                     <td>
                         <a href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">

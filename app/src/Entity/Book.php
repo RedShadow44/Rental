@@ -16,8 +16,6 @@ class Book
 {
     /**
      *Primary key.
-     *
-     *@var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -26,36 +24,44 @@ class Book
 
     /**
      *Title.
-     *
-     *@var string|null
      */
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
     /**
      *Author.
-     *
-     *@var string|null
      */
     #[ORM\Column(length: 255)]
     private ?string $author = null;
 
     /**
      *Description.
-     *
-     *@var string|null
      */
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
     /**
      * Category.
-     *
-     * @var Category
      */
     #[ORM\ManyToOne(targetEntity: Category::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
+    /**
+     * Created at.
+     *
+     * @psalm-suppress PropertyNotSetInConstructor
+     */
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    /**
+     * Updated at.
+     *
+     * @psalm-suppress PropertyNotSetInConstructor
+     */
+    #[ORM\Column(type: 'datetime_immutable')]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * Getter for Id.
@@ -66,7 +72,6 @@ class Book
     {
         return $this->id;
     }
-
 
     /**
      * Getter for title.
@@ -127,6 +132,7 @@ class Book
     {
         $this->description = $description;
     }
+
     /**
      * Getter for category.
      *
@@ -136,6 +142,7 @@ class Book
     {
         return $this->category;
     }
+
     /**
      * Setter for category.
      *
@@ -146,5 +153,45 @@ class Book
         $this->category = $category;
 
         return $this;
+    }
+
+    /**
+     * Getter for created at.
+     *
+     * @return \DateTimeImmutable|null Created at
+     */
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Setter for created at.
+     *
+     * @param \DateTimeImmutable|null $createdAt Created at
+     */
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * Getter for updated at.
+     *
+     * @return \DateTimeImmutable|null Updated at
+     */
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Setter for updated at.
+     *
+     * @param \DateTimeImmutable|null $updatedAt Updated at
+     */
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 }

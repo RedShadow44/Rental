@@ -5,11 +5,8 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
-use App\Entity\Enum\TaskStatus;
-use App\Entity\Tag;
 use App\Entity\Book;
-use App\Entity\User;
+use App\Entity\Category;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -35,7 +32,12 @@ class BookFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             $book->setTitle($this->faker->sentence);
             $book->setAuthor($this->faker->sentence);
             $book->setDescription($this->faker->sentence);
-
+            $book->setCreatedAt(
+                \DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
+            );
+            $book->setUpdatedAt(
+                \DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
+            );
             /** @var Category $category */
             $category = $this->getRandomReference('categories');
             $book->setCategory($category);
