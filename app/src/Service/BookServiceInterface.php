@@ -21,5 +21,17 @@ interface BookServiceInterface
      * @return PaginationInterface<string, mixed> Paginated list
      */
     public function getPaginatedList(int $page): PaginationInterface;
+    /**
+     * Save entity.
+     *
+     * @param Book $book Book entity
+     */
+    public function save(Book $book): void;
+    /**
+     * Delete entity.
+     *
+     * @param Book $book Book entity
+     */
+    public function delete(Book $book): void;
 
 }

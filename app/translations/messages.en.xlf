@@ -120,6 +120,32 @@
         <target>Success</target>
      </trans-unit>
 
+     <trans-unit id="title.book_edit">
+        <source>title.book_edit</source>
+        <target>Edit book</target>
+     </trans-unit>
+
+     <trans-unit id="title.book_delete">
+        <source>title.book_delete</source>
+        <target>Delete book</target>
+     </trans-unit>
+
+     <trans-unit id="action.create_book">
+        <source>action.create_book</source>
+        <target>Create new book</target>
+     </trans-unit>
+
+     <trans-unit id="title.book_create">
+        <source>title.book_create</source>
+        <target>Create new book</target>
+     </trans-unit>
+
+     <trans-unit id="message.form_error">
+        <source>message.form_error</source>
+        <target>Form error</target>
+     </trans-unit>
+
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

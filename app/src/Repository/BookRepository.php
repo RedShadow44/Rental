@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -57,6 +59,34 @@ class BookRepository extends ServiceEntityRepository
             ->join('book.category', 'category')
             ->orderBy('book.updatedAt', 'DESC');
     }
+
+    /**
+     * Save entity.
+     *
+     * @param Book $book Book entity
+     */
+    public function save(Book $book): void
+    {
+        // assert($this->_em instanceof EntityManager);
+        $this->_em->persist($book);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Book $book Book entity
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function delete(Book $book): void
+    {
+        // assert($this->_em instanceof EntityManager);
+        $this->_em->remove($book);
+        $this->_em->flush();
+    }
+
     /**
      * Get or create new query builder.
      *
@@ -64,7 +94,7 @@ class BookRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('book');
     }
