@@ -144,6 +144,12 @@
         <source>message.form_error</source>
         <target>Błąd formularza</target>
      </trans-unit>
+
+     <trans-unit id="title.books_for_category">
+        <source>title.books_for_category</source>
+        <target>Książki w tej kategorii</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

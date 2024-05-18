@@ -6,6 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Book;
+use App\Entity\Category;
 use App\Repository\BookRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -52,6 +53,15 @@ class BookService implements BookServiceInterface
             $page,
             self::PAGINATOR_ITEMS_PER_PAGE
         );
+    }
+    /**
+     * Get all tasks for category.
+     *
+     * @return array Books for category.
+     */
+    public function findBooksForCategory(Category $category): array
+    {
+        return $this->bookRepository->findBooksForCategory($category);
     }
 
     /**

@@ -7,6 +7,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\Type\CategoryType;
+use App\Service\BookServiceInterface;
 use App\Service\CategoryServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -27,9 +28,8 @@ class CategoryController extends AbstractController
      *
      * @param CategoryServiceInterface $categoryService Task service
      */
-    public function __construct(private readonly CategoryServiceInterface $categoryService, private readonly TranslatorInterface $translator)
+    public function __construct(private readonly CategoryServiceInterface $categoryService, private readonly BookServiceInterface $bookService, private readonly TranslatorInterface $translator)
     {
-
     }
 
     /**
@@ -60,8 +60,29 @@ class CategoryController extends AbstractController
     )]
     public function show(Category $category): Response
     {
-        return $this->render('category/show.html.twig', ['category' => $category]);
+        $books = $this->bookService->findBooksForCategory($category);
+        return $this->render('category/show.html.twig', ['category' => $category,'books'=>$books]);
     }
+    /**
+     * Show books for category action.
+     *
+     * @param Category $category Category
+     *
+     * @return Response HTTP response
+     */
+    
+//    #[Route(
+//        '/{id}/all',
+//        name: 'category_all_books',
+//        requirements: ['id' => '[1-9]\d*'],
+//        methods: 'GET'
+//    )]
+//    public function showAllBooksForCategory(Category $category): Response
+//    {
+//        $books = $this->bookService->findBooksForCategory($category);
+//
+//        return $this->render('category/showAllBooksForCategory.html.twig', ['books'=>$books]);
+//    }
 
     /**
      * Create action.
@@ -144,7 +165,7 @@ class CategoryController extends AbstractController
         );
     }
 
-// ...
+    // ...
     /**
      * Delete action.
      *
@@ -186,5 +207,4 @@ class CategoryController extends AbstractController
             ]
         );
     }
-
 }

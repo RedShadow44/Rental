@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -58,6 +59,20 @@ class BookRepository extends ServiceEntityRepository
             )
             ->join('book.category', 'category')
             ->orderBy('book.updatedAt', 'DESC');
+    }
+
+    /**
+     * Query all tasks for category.
+     *
+     * @return QueryBuilder Query builder
+     */
+    public function findBooksForCategory(Category $category): array
+    {
+        return $this->getOrCreateQueryBuilder()
+            ->andWhere('book.category = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult();
     }
 
     /**
