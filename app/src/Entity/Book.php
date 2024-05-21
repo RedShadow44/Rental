@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use DateTimeImmutable;
+
 
 /**
  * Class Book.
@@ -26,18 +30,27 @@ class Book
      *Title.
      */
     #[ORM\Column(length: 255)]
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 255)]
     private ?string $title = null;
 
     /**
      *Author.
      */
     #[ORM\Column(length: 255)]
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 255)]
     private ?string $author = null;
 
     /**
      *Description.
      */
     #[ORM\Column(length: 255)]
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 255)]
     private ?string $description = null;
 
     /**
@@ -53,6 +66,8 @@ class Book
      * @psalm-suppress PropertyNotSetInConstructor
      */
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Gedmo\Timestampable(on: 'create')]
+    #[Assert\Type(DateTimeImmutable::class)]
     private ?\DateTimeImmutable $createdAt = null;
 
     /**
@@ -61,6 +76,8 @@ class Book
      * @psalm-suppress PropertyNotSetInConstructor
      */
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Gedmo\Timestampable(on: 'update')]
+    #[Assert\Type(DateTimeImmutable::class)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**

@@ -150,6 +150,11 @@
         <target>Książki w tej kategorii</target>
      </trans-unit>
 
+     <trans-unit id="message.category_contains_books">
+         <source>message.category_contains_books</source>
+         <target>Kategoria nie może zostać usunięta (powód: kategoria zawiera książki)</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

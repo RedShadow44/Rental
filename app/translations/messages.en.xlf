@@ -149,7 +149,12 @@
         <source>title.books_for_category</source>
         <target>Books in this category</target>
      </trans-unit>
-<!--      </trans-unit> -->
+
+     <trans-unit id="message.category_contains_books">
+        <source>message.category_contains_books</source>
+        <target>Category can't be deleted (reason: category contains books)</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

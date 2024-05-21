@@ -8,6 +8,9 @@ namespace App\Entity;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use DateTimeImmutable;
 
 /**
  * Class Category.
@@ -36,6 +39,8 @@ class Category
      * @var \DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Gedmo\Timestampable(on: 'create')]
+    #[Assert\Type(DateTimeImmutable::class)]
     private ?\DateTimeImmutable $createdAt = null;
 
     /**
@@ -44,6 +49,8 @@ class Category
      * @var \DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Gedmo\Timestampable(on: 'update')]
+    #[Assert\Type(DateTimeImmutable::class)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
@@ -51,8 +58,21 @@ class Category
      *
      * @var string|null
      */
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 64)]
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2, max: 64)]
     private ?string $title = null;
+    /**
+     * Slug.
+     *
+     * @var string|null
+     */
+    #[ORM\Column(type: 'string', length: 64)]
+    #[Gedmo\Slug(fields: ['title'])]
+    #[Assert\Type('string')]
+    #[Assert\Length(min: 2, max: 64)]
+    private ?string $slug = null;
 
     /**
      * Getter for Id.
@@ -122,5 +142,17 @@ class Category
     public function setTitle(?string $title): void
     {
         $this->title = $title;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

@@ -74,10 +74,10 @@ class BookService implements BookServiceInterface
      */
     public function save(Book $book): void
     {
-        if (null === $book->getId()) {
-            $book->setCreatedAt(new \DateTimeImmutable());
-        }
-        $book->setUpdatedAt(new \DateTimeImmutable());
+//        if (null === $book->getId()) {
+//            $book->setCreatedAt(new \DateTimeImmutable());
+//        }
+//        $book->setUpdatedAt(new \DateTimeImmutable());
         $this->bookRepository->save($book);
     }
     /**
