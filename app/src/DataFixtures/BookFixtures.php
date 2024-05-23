@@ -7,6 +7,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Book;
 use App\Entity\Category;
+use App\Entity\Tag;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -41,6 +42,12 @@ class BookFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             /** @var Category $category */
             $category = $this->getRandomReference('categories');
             $book->setCategory($category);
+
+            /* @var Tag $tag */
+            for ($i = rand(1,3); $i < 5; $i++) {
+                $tag = $this->getRandomReference('tags');
+                $book->addTag($tag);
+            }
 
             return $book;
         });

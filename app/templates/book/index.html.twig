@@ -25,6 +25,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'book.updatedAt') }}</th>
 
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.tags'|trans, 'tags.title') }}</th>
 
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
@@ -39,6 +40,12 @@
                     <td>{{ book.createdAt|format_date('long') }}</td>
                     <td>{{ book.updatedAt|format_date('long') }}</td>
                     <td>{{ book.category.title }}</td>
+                    <td>
+                        {% for tag in book.tags %}
+                            {{ tag.title }}
+                        {% endfor %}
+
+                    </td>
                     <td>
                         <a href="{{ url('book_show', {id: book.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
