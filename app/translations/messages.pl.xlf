@@ -62,12 +62,12 @@
 
      <trans-unit id="label.created_at">
         <source>label.created_at</source>
-        <target>Utworzone</target>
+        <target>Data utworzenia</target>
      </trans-unit>
 
      <trans-unit id="label.updated_at">
         <source>label.updated_at</source>
-        <target>Zmienione</target>
+        <target>Data zmiany</target>
      </trans-unit>
 
      <trans-unit id="action.edit">
@@ -154,6 +154,46 @@
          <source>message.category_contains_books</source>
          <target>Kategoria nie może zostać usunięta (powód: kategoria zawiera książki)</target>
      </trans-unit>
+
+     <trans-unit id="label.tags">
+             <source>label.tags</source>
+             <target>Tagi</target>
+          </trans-unit>
+
+          <trans-unit id="title.tag_edit">
+             <source>title.tag_edit</source>
+             <target>Edytuj tag</target>
+          </trans-unit>
+
+          <trans-unit id="title.tag_delete">
+             <source>title.tag_delete</source>
+             <target>Usuń tag</target>
+          </trans-unit>
+
+          <trans-unit id="title.tag_create">
+             <source>title.tag_create</source>
+             <target>Stwórz nowy tag</target>
+          </trans-unit>
+
+          <trans-unit id="title.tag_list">
+             <source>title.tag_list</source>
+             <target>Lista tagów</target>
+          </trans-unit>
+
+          <trans-unit id="action.create_tag">
+             <source>action.create_tag</source>
+             <target>Stwórz nowy tag</target>
+          </trans-unit>
+
+          <trans-unit id="title.tag_details">
+             <source>title.tag_details</source>
+             <target>Szczegóły tagu</target>
+          </trans-unit>
+
+          <trans-unit id="message.edited_successfully">
+             <source>message.edited_successfully</source>
+             <target>Zedytowano pomyślnie</target>
+          </trans-unit>
 
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->

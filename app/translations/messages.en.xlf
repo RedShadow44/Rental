@@ -155,6 +155,46 @@
         <target>Category can't be deleted (reason: category contains books)</target>
      </trans-unit>
 
+     <trans-unit id="label.tags">
+        <source>label.tags</source>
+        <target>Tags</target>
+     </trans-unit>
+
+     <trans-unit id="title.tag_edit">
+        <source>title.tag_edit</source>
+        <target>Edit tag</target>
+     </trans-unit>
+
+     <trans-unit id="title.tag_delete">
+        <source>title.tag_delete</source>
+        <target>Delete tag</target>
+     </trans-unit>
+
+     <trans-unit id="title.tag_create">
+        <source>title.tag_create</source>
+        <target>Create new tag</target>
+     </trans-unit>
+
+     <trans-unit id="title.tag_list">
+        <source>title.tag_list</source>
+        <target>Tag list</target>
+     </trans-unit>
+
+     <trans-unit id="action.create_tag">
+        <source>action.create_tag</source>
+        <target>Create new tag</target>
+     </trans-unit>
+
+     <trans-unit id="title.tag_details">
+        <source>title.tag_details</source>
+        <target>Tag details</target>
+     </trans-unit>
+
+     <trans-unit id="message.edited_successfully">
+        <source>message.edited_successfully</source>
+        <target>Edited successfully</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->
