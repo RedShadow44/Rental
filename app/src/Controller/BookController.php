@@ -22,17 +22,24 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/book')]
 class BookController extends AbstractController
 {
+
+
     /**
      * Constructor.
+     *
+     * @param BookServiceInterface $bookService Book service
+     * @param TranslatorInterface  $translator  Translator
      */
     public function __construct(private readonly BookServiceInterface $bookService, private readonly TranslatorInterface $translator)
     {
-    }
+
+    }//end __construct()
+
 
     /**
      * Index action.
      *
-     * @param int $page Page number
+     * @param integer $page Page number
      *
      * @return Response HTTP response
      */
@@ -40,12 +47,14 @@ class BookController extends AbstractController
         name: 'book_index',
         methods: 'GET'
     )]
-    public function index(#[MapQueryParameter] int $page = 1): Response
+    public function index(#[MapQueryParameter] int $page=1): Response
     {
         $pagination = $this->bookService->getPaginatedList($page);
 
         return $this->render('book/index.html.twig', ['pagination' => $pagination]);
-    }
+
+    }//end index()
+
 
     /**
      * Show action.
@@ -66,7 +75,9 @@ class BookController extends AbstractController
             'book/show.html.twig',
             ['book' => $book]
         );
-    }
+
+    }//end show()
+
 
     /**
      * Create action.
@@ -101,7 +112,9 @@ class BookController extends AbstractController
             'book/create.html.twig',
             ['form' => $form->createView()]
         );
-    }
+
+    }//end create()
+
 
     /**
      * Edit action.
@@ -147,7 +160,10 @@ class BookController extends AbstractController
                 'book' => $book,
             ]
         );
-    }
+
+    }//end edit()
+
+
     /**
      * Delete action.
      *
@@ -164,10 +180,14 @@ class BookController extends AbstractController
     )]
     public function delete(Request $request, Book $book): Response
     {
-        $form = $this->createForm(FormType::class, $book, [
-            'method' => 'DELETE',
-            'action' => $this->generateUrl('book_delete', ['id' => $book->getId()]),
-        ]);
+        $form = $this->createForm(
+            FormType::class,
+            $book,
+            [
+                'method' => 'DELETE',
+                'action' => $this->generateUrl('book_delete', ['id' => $book->getId()]),
+            ]
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -188,5 +208,8 @@ class BookController extends AbstractController
                 'book' => $book,
             ]
         );
-    }
-}
+
+    }//end delete()
+
+
+}//end class

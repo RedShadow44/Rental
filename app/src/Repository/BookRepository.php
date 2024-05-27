@@ -57,14 +57,18 @@ class BookRepository extends ServiceEntityRepository
         return $this->getOrCreateQueryBuilder()
             ->select(
                 'partial book.{id, title, author, description, createdAt, updatedAt}',
-                'partial category.{id, title}'
+                'partial category.{id, title}',
+                'partial tag.{id, title}'
             )
             ->join('book.category', 'category')
+            ->leftJoin('book.tags', 'tag')
             ->orderBy('book.updatedAt', 'DESC');
     }
 
     /**
      * Query all tasks for category.
+     *
+     * @param Category $category Category
      *
      * @return QueryBuilder Query builder
      */

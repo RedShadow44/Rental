@@ -26,6 +26,8 @@ interface BookServiceInterface
     /**
      * Get all tasks for category.
      *
+     * @param Category $category Category
+     *
      * @return array books for category
      */
     public function findBooksForCategory(Category $category): array;
@@ -33,7 +35,7 @@ interface BookServiceInterface
     /**
      * Save entity.
      *
-     * @param Book $book Book entity
+     * @param Book $book book entity
      */
     public function save(Book $book): void;
 
@@ -43,4 +45,4 @@ interface BookServiceInterface
      * @param Book $book Book entity
      */
     public function delete(Book $book): void;
-}
+}// end interface

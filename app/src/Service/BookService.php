@@ -29,6 +29,7 @@ class BookService implements BookServiceInterface
      */
     private const PAGINATOR_ITEMS_PER_PAGE = 10;
 
+
     /**
      * Constructor.
      *
@@ -37,12 +38,14 @@ class BookService implements BookServiceInterface
      */
     public function __construct(private readonly BookRepository $bookRepository, private readonly PaginatorInterface $paginator)
     {
-    }
+
+    }//end __construct()
+
 
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param integer $page Page number
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
@@ -53,16 +56,23 @@ class BookService implements BookServiceInterface
             $page,
             self::PAGINATOR_ITEMS_PER_PAGE
         );
-    }
+
+    }//end getPaginatedList()
+
+
     /**
      * Get all tasks for category.
+     *
+     * @param Category $category Category
      *
      * @return array Books for category.
      */
     public function findBooksForCategory(Category $category): array
     {
         return $this->bookRepository->findBooksForCategory($category);
-    }
+
+    }//end findBooksForCategory()
+
 
     /**
      * Save entity.
@@ -74,12 +84,15 @@ class BookService implements BookServiceInterface
      */
     public function save(Book $book): void
     {
-//        if (null === $book->getId()) {
-//            $book->setCreatedAt(new \DateTimeImmutable());
-//        }
-//        $book->setUpdatedAt(new \DateTimeImmutable());
+        // if (null === $book->getId()) {
+        // $book->setCreatedAt(new \DateTimeImmutable());
+        // }
+        // $book->setUpdatedAt(new \DateTimeImmutable());
         $this->bookRepository->save($book);
-    }
+
+    }//end save()
+
+
     /**
      * Delete entity.
      *
@@ -91,5 +104,8 @@ class BookService implements BookServiceInterface
     public function delete(Book $book): void
     {
         $this->bookRepository->delete($book);
-    }
-}
+
+    }//end delete()
+
+
+}//end class

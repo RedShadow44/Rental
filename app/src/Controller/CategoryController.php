@@ -23,27 +23,37 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/category')]
 class CategoryController extends AbstractController
 {
+
+
     /**
      * Constructor.
      *
-     * @param CategoryServiceInterface $categoryService Task service
+     * @param CategoryServiceInterface $categoryService Category service
+     * @param BookServiceInterface     $bookService     Book service
+     * @param TranslatorInterface      $translator      Translator
      */
     public function __construct(private readonly CategoryServiceInterface $categoryService, private readonly BookServiceInterface $bookService, private readonly TranslatorInterface $translator)
     {
-    }
+
+    }//end __construct()
+
 
     /**
      * Index action.
      *
+     *  @param integer $page Page number
+     *
      * @return Response HTTP response
      */
     #[Route(name: 'category_index', methods: 'GET')]
-    public function index(#[MapQueryParameter] int $page = 1): Response
+    public function index(#[MapQueryParameter] int $page=1): Response
     {
         $pagination = $this->categoryService->getPaginatedList($page);
 
         return $this->render('category/index.html.twig', ['pagination' => $pagination]);
-    }
+
+    }//end index()
+
 
     /**
      * Show action.
@@ -61,28 +71,31 @@ class CategoryController extends AbstractController
     public function show(Category $category): Response
     {
         $books = $this->bookService->findBooksForCategory($category);
-        return $this->render('category/show.html.twig', ['category' => $category,'books'=>$books]);
-    }
+
+        return $this->render('category/show.html.twig', ['category' => $category, 'books' => $books]);
+
+    }//end show()
+
+
     /**
      * Show books for category action.
      *
-     * @param Category $category Category
-     *
      * @return Response HTTP response
      */
-    
-//    #[Route(
-//        '/{id}/all',
-//        name: 'category_all_books',
-//        requirements: ['id' => '[1-9]\d*'],
-//        methods: 'GET'
-//    )]
-//    public function showAllBooksForCategory(Category $category): Response
-//    {
-//        $books = $this->bookService->findBooksForCategory($category);
-//
-//        return $this->render('category/showAllBooksForCategory.html.twig', ['books'=>$books]);
-//    }
+
+    // #[Route(
+    // '/{id}/all',
+    // name: 'category_all_books',
+    // requirements: ['id' => '[1-9]\d*'],
+    // methods: 'GET'
+    // )]
+    // public function showAllBooksForCategory(Category $category): Response
+    // {
+    // $books = $this->bookService->findBooksForCategory($category);
+    //
+    // return $this->render('category/showAllBooksForCategory.html.twig', ['books'=>$books]);
+    // }
+
 
     /**
      * Create action.
@@ -99,7 +112,7 @@ class CategoryController extends AbstractController
     public function create(Request $request): Response
     {
         $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
+        $form     = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -117,7 +130,9 @@ class CategoryController extends AbstractController
             'category/create.html.twig',
             ['form' => $form->createView()]
         );
-    }
+
+    }//end create()
+
 
     /**
      * Edit action.
@@ -159,13 +174,17 @@ class CategoryController extends AbstractController
         return $this->render(
             'category/edit.html.twig',
             [
-                'form' => $form->createView(),
+                'form'     => $form->createView(),
                 'category' => $category,
             ]
         );
-    }
+
+    }//end edit()
+
 
     // ...
+
+
     /**
      * Delete action.
      *
@@ -182,18 +201,23 @@ class CategoryController extends AbstractController
     )]
     public function delete(Request $request, Category $category): Response
     {
-        if(!$this->categoryService->canBeDeleted($category)) {
+        if (!$this->categoryService->canBeDeleted($category)) {
             $this->addFlash(
                 'warning',
                 $this->translator->trans('message.category_contains_books')
             );
+
             return $this->redirectToRoute('book_index');
         }
 
-            $form = $this->createForm(FormType::class, $category, [
-            'method' => 'DELETE',
-            'action' => $this->generateUrl('category_delete', ['id' => $category->getId()]),
-        ]);
+        $form = $this->createForm(
+            FormType::class,
+            $category,
+            [
+                'method' => 'DELETE',
+                'action' => $this->generateUrl('category_delete', ['id' => $category->getId()]),
+            ]
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -210,9 +234,12 @@ class CategoryController extends AbstractController
         return $this->render(
             'category/delete.html.twig',
             [
-                'form' => $form->createView(),
+                'form'     => $form->createView(),
                 'category' => $category,
             ]
         );
-    }
-}
+
+    }//end delete()
+
+
+}//end class

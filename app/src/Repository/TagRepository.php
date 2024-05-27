@@ -15,10 +15,18 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TagRepository extends ServiceEntityRepository
 {
+
+
+    /**
+     * Constructor.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Tag::class);
-    }
+
+    }//end __construct()
+
+
     /**
      * Query all records.
      *
@@ -29,13 +37,24 @@ class TagRepository extends ServiceEntityRepository
         return $this->getOrCreateQueryBuilder()
             ->select('partial tag.{id, createdAt, updatedAt, title}')
             ->orderBy('tag.updatedAt', 'DESC');
-    }
+
+    }//end queryAll()
+
+
+    /**
+     * Save entity.
+     *
+     * @param Tag $tag Tag entity
+     */
     public function save(Tag $tag): void
     {
         assert($this->_em instanceof EntityManager);
         $this->_em->persist($tag);
         $this->_em->flush();
-    }
+
+    }//end save()
+
+
     /**
      * Delete entity.
      *
@@ -49,7 +68,10 @@ class TagRepository extends ServiceEntityRepository
         assert($this->_em instanceof EntityManager);
         $this->_em->remove($tag);
         $this->_em->flush();
-    }
+
+    }//end delete()
+
+
     /**
      * Get or create new query builder.
      *
@@ -57,33 +79,34 @@ class TagRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder=null): QueryBuilder
     {
-        return $queryBuilder ?? $this->createQueryBuilder('tag');
-    }
+        return ($queryBuilder ?? $this->createQueryBuilder('tag'));
 
-    //    /**
-    //     * @return Tag[] Returns an array of Tag objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('t.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    }//end getOrCreateQueryBuilder()
 
-    //    public function findOneBySomeField($value): ?Tag
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
-}
+
+    // **
+    // * @return Tag[] Returns an array of Tag objects
+    // */
+    // public function findByExampleField($value): array
+    // {
+    // return $this->createQueryBuilder('t')
+    // ->andWhere('t.exampleField = :val')
+    // ->setParameter('val', $value)
+    // ->orderBy('t.id', 'ASC')
+    // ->setMaxResults(10)
+    // ->getQuery()
+    // ->getResult()
+    // ;
+    // }
+    // public function findOneBySomeField($value): ?Tag
+    // {
+    // return $this->createQueryBuilder('t')
+    // ->andWhere('t.exampleField = :val')
+    // ->setParameter('val', $value)
+    // ->getQuery()
+    // ->getOneOrNullResult()
+    // ;
+    // }
+}//end class

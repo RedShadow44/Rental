@@ -90,7 +90,9 @@ class Book
     #[ORM\ManyToMany(targetEntity: Tag::class, fetch: 'EXTRA_LAZY', orphanRemoval: true)]
     #[ORM\JoinTable(name: 'tasks_tags')]
     private Collection $tags;
-
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -181,11 +183,10 @@ class Book
      *
      * @param Category|null $category Category
      */
-    public function setCategory(?Category $category): static
+    public function setCategory(?Category $category): void
     {
         $this->category = $category;
 
-        return $this;
     }
 
     /**
