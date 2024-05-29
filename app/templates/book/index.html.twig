@@ -11,9 +11,11 @@
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
+    {% if is_granted('ROLE_ADMIN') %}
         <a href="{{  url('book_create')}}" title="{{ 'action.create_book'|trans }}">
             {{ 'action.create_book'|trans }}
         </a>
+    {% endif %}
         <table class="table table-striped">
             <thead>
             <tr>
@@ -26,15 +28,18 @@
 
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.tags'|trans, 'tags.title') }}</th>
-
+            {% if is_granted('ROLE_ADMIN') %}
                 <th>{{ 'label.actions'|trans }}</th>
+            {% endif %}
             </tr>
             </thead>
             <tbody>
             {% for book in pagination.items %}
                 <tr>
                     <td>{{ book.id }}</td>
-                    <td>{{ book.title }}</td>
+                    <td> <a href="{{ url('book_show', {id: book.id}) }}" title="{{ 'action.show'|trans }}">
+                            {{ book.title}}
+                        </a></td>
                     <td>{{ book.author }}</td>
                     <td>{{ book.description }}</td>
                     <td>{{ book.createdAt|format_date('long') }}</td>
@@ -46,10 +51,9 @@
                         {% endfor %}
 
                     </td>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <td>
-                        <a href="{{ url('book_show', {id: book.id}) }}" title="{{ 'action.show'|trans }}">
-                            {{ 'action.show'|trans }}
-                        </a>
+
                         <br>
                         <a href="{{ url('book_edit', {id: book.id}) }}" title="{{ 'action.edit'|trans }}">
                             {{ 'action.edit'|trans }}
@@ -59,6 +63,7 @@
                             {{ 'action.delete'|trans }}
                         </a>
                     </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

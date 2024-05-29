@@ -31,7 +31,7 @@ class BookFixtures extends AbstractBaseFixtures implements DependentFixtureInter
         $this->createMany(100, 'books', function (int $i) {
             $book = new Book();
             $book->setTitle($this->faker->sentence);
-            $book->setAuthor($this->faker->sentence);
+            $book->setAuthor($this->faker->name);
             $book->setDescription($this->faker->sentence);
             $book->setCreatedAt(
                 \DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))

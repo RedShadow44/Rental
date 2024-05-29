@@ -195,6 +195,66 @@
         <target>Edited successfully</target>
      </trans-unit>
 
+     <trans-unit id="message.sign_in">
+        <source>message.sign_in</source>
+        <target>Sign in</target>
+     </trans-unit>
+
+     <trans-unit id="label.email">
+        <source>label.email</source>
+        <target>Email</target>
+     </trans-unit>
+
+     <trans-unit id="label.password">
+        <source>label.password</source>
+        <target>Password</target>
+     </trans-unit>
+
+     <trans-unit id="label.remember_me">
+        <source>label.remember_me</source>
+        <target>Remember me</target>
+     </trans-unit>
+
+     <trans-unit id="action_logout">
+        <source>action_logout</source>
+        <target>Log out</target>
+     </trans-unit>
+
+     <trans-unit id="action_login">
+        <source>action_login</source>
+        <target>Log in</target>
+     </trans-unit>
+
+     <trans-unit id="action.book">
+        <source>action.book</source>
+        <target>Books</target>
+     </trans-unit>
+
+     <trans-unit id="action.category">
+        <source>action.category</source>
+        <target>Categorys</target>
+     </trans-unit>
+
+     <trans-unit id="action.tag">
+        <source>action.tag</source>
+        <target>Tags</target>
+     </trans-unit>
+
+     <trans-unit id="action.register">
+        <source>action.register</source>
+        <target>Sign up</target>
+     </trans-unit>
+
+     <trans-unit id="title.registration">
+        <source>tittle.registration</source>
+        <target>Registration</target>
+     </trans-unit>
+
+     <trans-unit id="message.create_account">
+        <source>message.create_account</source>
+        <target>Create new account</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

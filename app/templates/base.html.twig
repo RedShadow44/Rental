@@ -14,6 +14,41 @@
     {% endblock %}
 </head>
 <body>
+<header>
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-light" >
+            <ul class="navbar-nav">
+
+                {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url('book_index') }}" title="{{ 'action.book'|trans }}">
+                        {{ 'action.book'|trans }}</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url('category_index') }}" title="{{ 'action.category'|trans }}">
+                        {{ 'action.category'|trans }}</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url('tag_index') }}" title="{{ 'action.tag'|trans }}">
+                        {{ 'action.tag'|trans }}</a>
+                </li>
+                {% endif %}
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a class="navbar-brand">{{ app.user.email }}</a>
+                        <li class="nav-item active">
+                            <a class="nav-link"href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item active">
+                            <a class="nav-link"href="{{ url('app_login') }}">{{ 'action_login'|trans }}</a>
+                        </li>
+                    {% endif %}
+
+
+            </ul>
+    </nav>
+</header>
 <main role="main" class="container-fluid">
 {#    {% include 'default/_nav.html.twig' %}#}
 {#    {% include 'default/_flash_messages.html.twig' %}#}

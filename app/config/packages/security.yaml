@@ -41,7 +41,11 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/login, roles: PUBLIC_ACCESS}
-        - { path: ^/, roles: ROLE_USER}
+        - {path: ^/book, roles: PUBLIC_ACCESS}
+        - { path: ^/register, roles: PUBLIC_ACCESS}
+        - { path: ^/book, roles: ROLE_USER}
+        - { path: ^/category, roles: ROLE_ADMIN}
+        - { path: ^/tag, roles: ROLE_ADMIN}
 
 when@test:
     security:

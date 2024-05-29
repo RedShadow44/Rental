@@ -195,6 +195,65 @@
              <target>Zedytowano pomyślnie</target>
           </trans-unit>
 
+         <trans-unit id="message.sign_in">
+            <source>message.sign_in</source>
+            <target>Zaloguj</target>
+         </trans-unit>
+
+         <trans-unit id="label.email">
+            <source>label.email</source>
+            <target>Email</target>
+         </trans-unit>
+
+         <trans-unit id="label.password">
+            <source>label.password</source>
+            <target>Hasło</target>
+         </trans-unit>
+
+         <trans-unit id="label.remember_me">
+            <source>label.remember_me</source>
+            <target>Zapamiętaj mnie</target>
+         </trans-unit>
+
+         <trans-unit id="action_logout">
+            <source>action_logout</source>
+            <target>Wyloguj</target>
+         </trans-unit>
+
+         <trans-unit id="action_login">
+            <source>action_login</source>
+            <target>Zaloguj</target>
+         </trans-unit>
+
+         <trans-unit id="action.book">
+            <source>action.book</source>
+            <target>Książki</target>
+         </trans-unit>
+
+         <trans-unit id="action.category">
+            <source>action.category</source>
+            <target>Kategorie</target>
+         </trans-unit>
+
+         <trans-unit id="action.tag">
+            <source>action.tag</source>
+            <target>Tagi</target>
+         </trans-unit>
+
+        <trans-unit id="action.register">
+            <source>action.register</source>
+            <target>Zarejestruj się</target>
+         </trans-unit>
+
+         <trans-unit id="title.registration">
+            <source>tittle.registration</source>
+            <target>Rejestracja</target>
+         </trans-unit>
+
+         <trans-unit id="message.create_account">
+            <source>message.create_account</source>
+            <target>Stwórz nowe konto</target>
+         </trans-unit>
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->
