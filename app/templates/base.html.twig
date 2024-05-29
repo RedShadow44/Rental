@@ -32,10 +32,16 @@
                     <a class="nav-link" href="{{ url('tag_index') }}" title="{{ 'action.tag'|trans }}">
                         {{ 'action.tag'|trans }}</a>
                 </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ url('user_index') }}" title="{{ 'action.user'|trans }}">
+                            {{ 'action.user'|trans }}</a>
+                    </li>
                 {% endif %}
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <a class="navbar-brand">{{ app.user.email }}</a>
+{#                        <a class="navbar-brand" >{{ app.user.email }}</a>#}
+
+                        <a class="navbar-brand" href="{{ url('user_edit', {id: app.user.id}) }}">{{ app.user.email }}</a>
                         <li class="nav-item active">
                             <a class="nav-link"href="{{ url('app_logout') }}">{{ 'action_logout'|trans }}</a>
                         </li>

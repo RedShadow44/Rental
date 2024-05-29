@@ -246,7 +246,7 @@
          </trans-unit>
 
          <trans-unit id="title.registration">
-            <source>tittle.registration</source>
+            <source>title.registration</source>
             <target>Rejestracja</target>
          </trans-unit>
 

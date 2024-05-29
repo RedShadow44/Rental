@@ -5,7 +5,6 @@
 
 namespace App\Form\Type;
 
-use App\Entity\Registration;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -17,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class RegistrationType.
  */
-class RegistrationType extends AbstractType
+class UserType extends AbstractType
 {
 
 

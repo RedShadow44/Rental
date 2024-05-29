@@ -46,6 +46,7 @@ security:
         - { path: ^/book, roles: ROLE_USER}
         - { path: ^/category, roles: ROLE_ADMIN}
         - { path: ^/tag, roles: ROLE_ADMIN}
+        - { path: ^/user, roles: ROLE_ADMIN}
 
 when@test:
     security:

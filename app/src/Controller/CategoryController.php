@@ -182,9 +182,6 @@ class CategoryController extends AbstractController
     }//end edit()
 
 
-    // ...
-
-
     /**
      * Delete action.
      *
