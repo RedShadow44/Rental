@@ -8,6 +8,7 @@ namespace App\DataFixtures;
 use App\Entity\Book;
 use App\Entity\Category;
 use App\Entity\Tag;
+use App\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -47,6 +48,12 @@ class BookFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             for ($i = rand(1,3); $i < 5; $i++) {
                 $tag = $this->getRandomReference('tags');
                 $book->addTag($tag);
+            }
+
+            /* @var User $owner */
+            for ($i = rand(1,2); $i < 2; $i++) {
+                $owner = $this->getRandomReference('users');
+                $book->setOwner($owner);
             }
 
             return $book;

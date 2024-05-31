@@ -90,6 +90,9 @@ class Book
     #[ORM\ManyToMany(targetEntity: Tag::class, fetch: 'EXTRA_LAZY', orphanRemoval: true)]
     #[ORM\JoinTable(name: 'tasks_tags')]
     private Collection $tags;
+
+    #[ORM\ManyToOne]
+    private ?User $owner = null;
     /**
      * Constructor.
      */
@@ -258,5 +261,25 @@ class Book
     public function removeTag(Tag $tag): void
     {
         $this->tags->removeElement($tag);
+    }
+    /**
+     * Getter for owner.
+     *
+     * @return User|null Owner
+     */
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+    /**
+     * Setter for owner.
+     *
+     * @param User|null $owner Owner
+     */
+    public function setOwner(?User $owner): static
+    {
+        $this->owner = $owner;
+
+        return $this;
     }
 }

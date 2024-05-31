@@ -24,7 +24,32 @@
                     {{ tag.title }}
                 {% endfor %}
             </dd>
+            {% if is_granted('ROLE_ADMIN') %}
+
+                <dt>{{ 'label.owner'|trans }}</dt>
+                <dd>
+                    {% if book.owner != null %}
+                        {{ book.owner.email }}
+                    {% else %}
+                        {{ '-' }}
+                    {% endif %}
+                </dd>
+
+            {% endif %}
+
         </dl>
+        {% if book.owner == null %}
+        <p>
+{#            <a class="btn btn-primary" href="{{ url('rent') }}"#}
+{#               title="{{ 'action.rent'|trans }}" >#}
+{#                {{ 'action.rent'|trans }}#}
+{#            </a>#}
+            <a class="btn btn-primary"
+               title="{{ 'action.rent'|trans }}" >
+                {{ 'action.rent'|trans }}
+            </a>
+        </p>
+        {% endif %}
         <p>
             <a href="{{ url('book_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}

@@ -5,6 +5,7 @@
 
 namespace App\Service;
 
+use App\Dto\BookListInputFiltersDto;
 use App\Entity\Book;
 use App\Entity\Category;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -18,10 +19,11 @@ interface BookServiceInterface
      * Get paginated list.
      *
      * @param int $page Page number
+     * @param BookListInputFiltersDto $filters Filters
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface;
+    public function getPaginatedList(int $page, BookListInputFiltersDto $filters): PaginationInterface;
 
     /**
      * Get all tasks for category.

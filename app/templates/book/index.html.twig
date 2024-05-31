@@ -6,16 +6,27 @@
 
 {% block body %}
     <h1>{{ 'title.book_list'|trans }}</h1>
+
+
     {% if pagination is defined and pagination.items|length %}
+
 
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
+
+        <a class="btn btn-outline-primary"
+           href="{{ url('book_index')}}"
+           title="{{'label.clear_filters'|trans}}">
+            {{'label.clear_filters'|trans}}
+        </a>
+
     {% if is_granted('ROLE_ADMIN') %}
         <a href="{{  url('book_create')}}" title="{{ 'action.create_book'|trans }}">
             {{ 'action.create_book'|trans }}
         </a>
     {% endif %}
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -25,11 +36,17 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.description'|trans, 'book.description') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'book.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'book.updatedAt') }}</th>
-
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.tags'|trans, 'tags.title') }}</th>
+                <th>{{ 'label.tags'|trans }}</th>
+
+                <th>{{ 'label.available'|trans }}</th>
+
+
             {% if is_granted('ROLE_ADMIN') %}
+
+                <th>{{ 'label.owner'|trans }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
+
             {% endif %}
             </tr>
             </thead>
@@ -44,25 +61,61 @@
                     <td>{{ book.description }}</td>
                     <td>{{ book.createdAt|format_date('long') }}</td>
                     <td>{{ book.updatedAt|format_date('long') }}</td>
-                    <td>{{ book.category.title }}</td>
-                    <td>
-                        {% for tag in book.tags %}
-                            {{ tag.title }}
-                        {% endfor %}
+{#                    <td>{{ book.category.title }}</td>#}
+{#                    <td>#}
+{#                        {% for tag in book.tags %}#}
+{#                            {{ tag.title }}#}
+{#                        {% endfor %}#}
 
+{#                    </td>#}
+                    <td>
+
+                        <a class="btn btn-outline-primary"
+                           href="{{ url('book_index', {'categoryId' : book.category.id}) }}"
+                           title="{{ book.category.title }}">
+                            {{ book.category.title }}
+                        </a>
+
+                    </td>
+                    <td>
+                        {% if book.tags is defined and book.tags|length %}
+                            {% for tag in book.tags %}
+                                <a class="btn btn-outline-primary"
+                                   href="{{ url('book_index', {'tagId' : tag.id}) }}"
+                                   title="{{ tag.title }}">
+                                    {{ tag.title }}
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if book.owner == null%}
+                            {{ 'message.available' }}
+                        {% else %}
+                            {{ 'message.not_available' }}
+                        {% endif %}
                     </td>
                     {% if is_granted('ROLE_ADMIN') %}
-                    <td>
+                        <td>
+                            {% if book.owner != null %}
+                                {{ book.owner.email }}
+                            {% else %}
+                                {{ '-' }}
+                            {% endif %}
+                        </td>
+                        <td>
 
-                        <br>
-                        <a href="{{ url('book_edit', {id: book.id}) }}" title="{{ 'action.edit'|trans }}">
-                            {{ 'action.edit'|trans }}
-                        </a>
-                        <br>
-                        <a href="{{ url('book_delete', {id: book.id}) }}" title="{{ 'action.delete'|trans }}">
-                            {{ 'action.delete'|trans }}
-                        </a>
-                    </td>
+                            <br>
+                            <a href="{{ url('book_edit', {id: book.id}) }}" title="{{ 'action.edit'|trans }}">
+                                {{ 'action.edit'|trans }}
+                            </a>
+                            <br>
+                            <a href="{{ url('book_delete', {id: book.id}) }}" title="{{ 'action.delete'|trans }}">
+                                {{ 'action.delete'|trans }}
+                            </a>
+                        </td>
                     {% endif %}
                 </tr>
             {% endfor %}

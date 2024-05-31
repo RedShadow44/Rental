@@ -96,6 +96,10 @@ class SecurityController extends AbstractController
     }//end index()
 
     /**
+     * TODO: user profile
+    */
+
+    /**
      * Edit action.
      *
      * @param Request  $request  HTTP request
@@ -144,4 +148,53 @@ class SecurityController extends AbstractController
         );
 
     }//end edit()
+    /**
+     * Edit action.
+     *
+     * @param Request  $request  HTTP request
+     * @param User $user User entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route(
+        'change/{id}',
+        name: 'user_change_data',
+        requirements: ['id' => '[1-9]\d*'],
+        methods: 'GET|PUT'
+    )]
+    public function change(Request $request, User $user): Response
+    {
+        $form = $this->createForm(
+            UserType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('user_change_data', ['id' => $user->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+
+            $user->setRoles([UserRole::ROLE_USER->value]);
+            $this->userService->save($user);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.created_successfully')
+            );
+
+            return $this->redirectToRoute('book_index');
+        }
+
+        return $this->render(
+            'security/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user
+            ]
+        );
+
+    }
 }

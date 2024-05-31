@@ -5,14 +5,17 @@
 
 namespace App\Controller;
 
+use App\Dto\BookListInputFiltersDto;
 use App\Entity\Book;
 use App\Form\Type\BookType;
+use App\Resolver\BookListInputFiltersDtoResolver;
 use App\Service\BookServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -22,8 +25,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/book')]
 class BookController extends AbstractController
 {
-
-
     /**
      * Constructor.
      *
@@ -32,14 +33,12 @@ class BookController extends AbstractController
      */
     public function __construct(private readonly BookServiceInterface $bookService, private readonly TranslatorInterface $translator)
     {
-
-    }//end __construct()
-
+    }// end __construct()
 
     /**
      * Index action.
      *
-     * @param integer $page Page number
+     * @param int $page Page number
      *
      * @return Response HTTP response
      */
@@ -47,14 +46,12 @@ class BookController extends AbstractController
         name: 'book_index',
         methods: 'GET'
     )]
-    public function index(#[MapQueryParameter] int $page=1): Response
+    public function index(#[MapQueryString(resolver: BookListInputFiltersDtoResolver::class)] BookListInputFiltersDto $filters,#[MapQueryParameter] int $page = 1): Response
     {
-        $pagination = $this->bookService->getPaginatedList($page);
+        $pagination = $this->bookService->getPaginatedList($page, $filters);
 
         return $this->render('book/index.html.twig', ['pagination' => $pagination]);
-
-    }//end index()
-
+    }// end index()
 
     /**
      * Show action.
@@ -75,9 +72,7 @@ class BookController extends AbstractController
             'book/show.html.twig',
             ['book' => $book]
         );
-
-    }//end show()
-
+    }// end show()
 
     /**
      * Create action.
@@ -112,9 +107,7 @@ class BookController extends AbstractController
             'book/create.html.twig',
             ['form' => $form->createView()]
         );
-
-    }//end create()
-
+    }// end create()
 
     /**
      * Edit action.
@@ -160,9 +153,7 @@ class BookController extends AbstractController
                 'book' => $book,
             ]
         );
-
-    }//end edit()
-
+    }// end edit()
 
     /**
      * Delete action.
@@ -208,8 +199,21 @@ class BookController extends AbstractController
                 'book' => $book,
             ]
         );
+    }// end delete()
 
-    }//end delete()
+    /*
+     * Rent action
+     */
 
-
-}//end class
+    //    #[Route(
+    //        '/{id}/rent',
+    //        name: 'book_rent',
+    //        requirements: ['id' => '[1-9]\d*'],
+    //        methods: 'GET|PUT'
+    //    )]
+    //    public function rent(Request $request, Book $book): Response
+    //    {
+    //
+    //
+    //    }
+}// end class

@@ -5,6 +5,8 @@
 
 namespace App\Service;
 
+use App\Dto\BookListFiltersDto;
+use App\Dto\BookListInputFiltersDto;
 use App\Entity\Book;
 use App\Entity\Category;
 use App\Repository\BookRepository;
@@ -29,50 +31,48 @@ class BookService implements BookServiceInterface
      */
     private const PAGINATOR_ITEMS_PER_PAGE = 10;
 
-
     /**
      * Constructor.
      *
-     * @param BookRepository     $bookRepository Task repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param BookRepository           $bookRepository  Task repository
+     * @param PaginatorInterface       $paginator       Paginator
+     * @param TagServiceInterface      $tagService      Tag service
+     * @param CategoryServiceInterface $categoryService Category service
      */
-    public function __construct(private readonly BookRepository $bookRepository, private readonly PaginatorInterface $paginator)
+    public function __construct(private readonly BookRepository $bookRepository, private readonly PaginatorInterface $paginator, private readonly TagServiceInterface $tagService, private readonly CategoryServiceInterface $categoryService)
     {
-
-    }//end __construct()
-
+    }// end __construct()
 
     /**
      * Get paginated list.
      *
-     * @param integer $page Page number
+     * @param int $page Page number
+     * @param BookListInputFiltersDto $filters Filters
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface
+    public function getPaginatedList(int $page, BookListInputFiltersDto $filters): PaginationInterface
     {
+        $filters = $this->prepareFilters($filters);
+
         return $this->paginator->paginate(
-            $this->bookRepository->queryAll(),
+            $this->bookRepository->queryAll($filters),
             $page,
             self::PAGINATOR_ITEMS_PER_PAGE
         );
-
-    }//end getPaginatedList()
-
+    }// end getPaginatedList()
 
     /**
      * Get all tasks for category.
      *
      * @param Category $category Category
      *
-     * @return array Books for category.
+     * @return array books for category
      */
     public function findBooksForCategory(Category $category): array
     {
         return $this->bookRepository->findBooksForCategory($category);
-
-    }//end findBooksForCategory()
-
+    }// end findBooksForCategory()
 
     /**
      * Save entity.
@@ -89,9 +89,7 @@ class BookService implements BookServiceInterface
         // }
         // $book->setUpdatedAt(new \DateTimeImmutable());
         $this->bookRepository->save($book);
-
-    }//end save()
-
+    }// end save()
 
     /**
      * Delete entity.
@@ -104,8 +102,20 @@ class BookService implements BookServiceInterface
     public function delete(Book $book): void
     {
         $this->bookRepository->delete($book);
+    }// end delete()
 
-    }//end delete()
-
-
-}//end class
+    /**
+     * Prepare filters for the tasks list.
+     *
+     * @param BookListInputFiltersDto $filters Raw filters from request
+     *
+     * @return BookListFiltersDto Result filters
+     */
+    private function prepareFilters(BookListInputFiltersDto $filters): BookListFiltersDto
+    {
+        return new BookListFiltersDto(
+            null !== $filters->categoryId ? $this->categoryService->findOneById($filters->categoryId) : null,
+            null !== $filters->tagId ? $this->tagService->findOneById($filters->tagId) : null,
+        );
+    }
+}// end class

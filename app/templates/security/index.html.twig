@@ -28,6 +28,11 @@
                     <td>{{ user.email }}</td>
 {#                    <td>{{ user.password }}</td>#}
                     <td>
+                        {% for role in user.roles %}
+                            {{ role }}
+                        {% endfor %}
+                    </td>
+                    <td>
 {#                        <a href="{{ url('user_show', {id: user.id}) }}" title="{{ 'action.show'|trans }}">#}
 {#                            {{ 'action.show'|trans }}#}
 {#                        </a>#}
