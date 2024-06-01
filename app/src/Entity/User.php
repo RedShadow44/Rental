@@ -57,6 +57,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank]
     private ?string $password;
 
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $blocked = false;
+
     /**
      * Getter for id.
      *
@@ -177,5 +180,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isBlocked(): ?bool
+    {
+        return $this->blocked;
+    }
+
+    public function setBlocked(bool $blocked): static
+    {
+        $this->blocked = $blocked;
+
+        return $this;
     }
 }

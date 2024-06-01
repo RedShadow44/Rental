@@ -59,6 +59,7 @@ class UserService implements UserServiceInterface
             self::PAGINATOR_ITEMS_PER_PAGE
         );
     }
+
     /**
      * Save entity.
      *
@@ -85,5 +86,10 @@ class UserService implements UserServiceInterface
 
     }
 
+    public function isLastAdmin(User $user): bool
+    {
+        $admins = $this->userRepository->findByRole('ROLE_ADMIN');
+        return count($admins) === 1 && $admins[0] === $user;
+    }
 
 }

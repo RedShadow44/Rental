@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -60,6 +61,7 @@ class BookController extends AbstractController
      *
      * @return Response HTTP response
      */
+    #[IsGranted('VIEW', subject: 'book')]
     #[Route(
         '/{id}',
         name: 'book_show',

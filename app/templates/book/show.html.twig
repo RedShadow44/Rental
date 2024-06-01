@@ -35,6 +35,15 @@
                     {% endif %}
                 </dd>
 
+
+                <a class="btn btn-outline-primary" href="{{ url('book_edit', {id: book.id}) }}" title="{{ 'action.edit'|trans }}">
+                    {{ 'action.edit'|trans }}
+                </a>
+
+                <a class="btn btn-outline-primary" href="{{ url('book_delete', {id: book.id}) }}" title="{{ 'action.delete'|trans }}">
+                    {{ 'action.delete'|trans }}
+                </a>
+
             {% endif %}
 
         </dl>
@@ -44,10 +53,12 @@
 {#               title="{{ 'action.rent'|trans }}" >#}
 {#                {{ 'action.rent'|trans }}#}
 {#            </a>#}
+
             <a class="btn btn-primary"
                title="{{ 'action.rent'|trans }}" >
                 {{ 'action.rent'|trans }}
             </a>
+
         </p>
         {% endif %}
         <p>

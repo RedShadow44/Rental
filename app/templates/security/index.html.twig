@@ -12,12 +12,21 @@
         <div class="navigation text-center">
             {{ knp_pagination_render(pagination) }}
         </div>
+
+        <a href="{{  url('register')}}" title="{{ 'action.create_user'|trans }}">
+            {{ 'action.create_user'|trans }}
+        </a>
+
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'usery.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.email'|trans, 'user.email') }}</th>
 {#                <th>{{ knp_pagination_sortable(pagination, 'label.password'|trans, 'user.password') }}</th>#}
+{#                <th>{{ 'label.role'|trans }}</th>#}
+{#                <th>{{ knp_pagination_sortable(pagination, 'label.role'|trans, 'user.role') }}</th>#}
+{#                <th>{{ 'label.blocked'|trans }}</th>#}
+{#                <th>{{ knp_pagination_sortable(pagination, 'label.blocked'|trans, 'user.blocked') }}</th>#}
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
@@ -27,19 +36,48 @@
                     <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
 {#                    <td>{{ user.password }}</td>#}
+{#                    <td>#}
+{#                        {% for role in user.roles %}#}
+{#                            {{ role }}#}
+{#                        {% endfor %}#}
+{#                    </td>#}
+{#                    <td>#}
+{#                        {% if user.blocked%}#}
+{#                            {{ 'true' }}#}
+{#                        {% else %}#}
+{#                            {{ 'false' }}#}
+{#                        {% endif %}#}
+{#                    </td>#}
+
                     <td>
-                        {% for role in user.roles %}
-                            {{ role }}
-                        {% endfor %}
-                    </td>
-                    <td>
-{#                        <a href="{{ url('user_show', {id: user.id}) }}" title="{{ 'action.show'|trans }}">#}
-{#                            {{ 'action.show'|trans }}#}
+                        <a href="{{ url('user_show', {id: user.id}) }}" title="{{ 'action.show'|trans }}">
+                            {{ 'action.show'|trans }}
+                        </a>
+                        <br>
+{#                        <a href="{{ url('user_edit', {id: user.id}) }}" title="{{ 'action.edit'|trans }}">#}
+{#                            {{ 'action.edit'|trans }}#}
 {#                        </a>#}
 {#                        <br>#}
-                        <a href="{{ url('user_edit', {id: user.id}) }}" title="{{ 'action.edit'|trans }}">
-                            {{ 'action.edit'|trans }}
-                        </a>
+{#                        {% if 'ROLE_ADMIN' not in user.roles %}#}
+{#                            <a href="{{ url('set_admin', {id: user.id}) }}" title="{{ 'action.set_admin'|trans }}">#}
+{#                                {{ 'action.set_admin'|trans }}#}
+{#                            </a>#}
+{#                        {% endif %}#}
+
+{#                        {% if 'ROLE_ADMIN' in user.roles %}#}
+{#                            <a href="{{ url('revoke_admin', {id: user.id}) }}" title="{{ 'action.revoke_admin'|trans }}">#}
+{#                                {{ 'action.revoke_admin'|trans }}#}
+{#                            </a>#}
+{#                        {% endif %}#}
+{#                        {% if not user.blocked %}#}
+{#                            <a href="{{ url('user_block', {id: user.id}) }}" title="{{ 'action.block'|trans }}">#}
+{#                                {{ 'action.block'|trans }}#}
+{#                            </a>#}
+{#                        {% else %}#}
+{#                            <a href="{{ url('user_unblock', {id: user.id}) }}" title="{{ 'action.unblock'|trans }}">#}
+{#                                {{ 'action.unblock'|trans }}#}
+{#                            </a>#}
+{#                        {% endif %}#}
 {#                        <br>#}
 {#                        <a href="{{ url('user_delete', {id: user.id}) }}" title="{{ 'action.delete'|trans }}">#}
 {#                            {{ 'action.delete'|trans }}#}

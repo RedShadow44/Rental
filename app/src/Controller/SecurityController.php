@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Enum\UserRole;
 use App\Entity\User;
+use App\Form\Type\UserRoleType;
 use App\Form\Type\UserType;
 use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,6 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use Symfony\Component\Security\Core\Exception\DisabledException;
+use Symfony\Component\Security\Core\Exception\LockedException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -30,6 +34,7 @@ class SecurityController extends AbstractController
         //     return $this->redirectToRoute('target_path');
         // }
 
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -37,6 +42,7 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
@@ -94,6 +100,26 @@ class SecurityController extends AbstractController
         return $this->render('security/index.html.twig', ['pagination' => $pagination]);
 
     }//end index()
+    /**
+     * Show action.
+     *
+     * @param User $user User
+     *
+     * @return Response HTTP response
+     */
+    #[Route(
+        '/{id}',
+        name: 'user_show',
+        requirements: ['id' => '[1-9]\d*'],
+        methods: 'GET'
+    )]
+    public function show(User $user): Response
+    {
+
+        return $this->render('security/show.html.twig', ['user' => $user]);
+
+    }//end show()
+
 
     /**
      * TODO: user profile
@@ -165,7 +191,7 @@ class SecurityController extends AbstractController
     public function change(Request $request, User $user): Response
     {
         $form = $this->createForm(
-            UserType::class,
+            UserRoleType::class,
             $user,
             [
                 'method' => 'PUT',
@@ -197,4 +223,79 @@ class SecurityController extends AbstractController
         );
 
     }
+    #[Route(
+        '/user/{id}/set_admin',
+        requirements: ['id' => '[1-9]\d*'],
+        name: 'set_admin',
+        methods: 'GET|PUT'
+    )]
+    public function setAdmin (User $user):Response{
+
+        $user->setRoles([UserRole::ROLE_USER->value, UserRole::ROLE_ADMIN->value]);
+        $this->userService->save($user);
+
+        $this->addFlash(
+            'success',
+            $this->translator->trans('message.created_successfully')
+        );
+
+        return $this->redirectToRoute('user_index');
+    }
+    #[Route(
+        '/user/{id}/revoke_admin',
+        requirements: ['id' => '[1-9]\d*'],
+        name: 'revoke_admin',
+        methods: ['GET', 'PUT']
+    )]
+    public function revokeAdmin(User $user): Response
+    {
+        if ($this->userService->isLastAdmin($user)) {
+            $this->addFlash(
+                'error',
+                $this->translator->trans('message.cannot_revoke_last_admin')
+            );
+            return $this->redirectToRoute('user_index');
+        }
+        $roles = $user->getRoles();
+        $updatedRoles = array_diff($roles, [UserRole::ROLE_ADMIN->value]);
+        $user->setRoles($updatedRoles);
+        $this->userService->save($user);
+
+        $this->addFlash(
+            'success',
+            $this->translator->trans('message.role_revoked_successfully')
+        );
+
+        return $this->redirectToRoute('user_index');
+    }
+
+    #[Route('/user/{id}/block', name: 'user_block')]
+    public function blockUser(User $user): Response
+    {
+        $user->setBlocked(true);
+        $this->userService->save($user);
+
+        $this->addFlash(
+            'success',
+            $this->translator->trans('message.user_blocked_successfully')
+        );
+
+        return $this->redirectToRoute('user_index');
+    }
+
+    #[Route('/user/{id}/unblock', name: 'user_unblock')]
+    public function unblockUser(User $user): Response
+    {
+        $user->setBlocked(false);
+        $this->userService->save($user);
+
+        $this->addFlash(
+            'success',
+            $this->translator->trans('message.user_unblocked_successfully')
+        );
+
+        return $this->redirectToRoute('user_index');
+    }
+
+
 }

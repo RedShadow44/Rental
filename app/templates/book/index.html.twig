@@ -22,7 +22,8 @@
         </a>
 
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{  url('book_create')}}" title="{{ 'action.create_book'|trans }}">
+        <br>
+        <a class="btn btn-outline-primary" style="margin-top:10px" href="{{  url('book_create')}}" title="{{ 'action.create_book'|trans }}">
             {{ 'action.create_book'|trans }}
         </a>
     {% endif %}
@@ -45,7 +46,7 @@
             {% if is_granted('ROLE_ADMIN') %}
 
                 <th>{{ 'label.owner'|trans }}</th>
-                <th>{{ 'label.actions'|trans }}</th>
+{#                <th>{{ 'label.actions'|trans }}</th>#}
 
             {% endif %}
             </tr>
@@ -54,9 +55,15 @@
             {% for book in pagination.items %}
                 <tr>
                     <td>{{ book.id }}</td>
-                    <td> <a href="{{ url('book_show', {id: book.id}) }}" title="{{ 'action.show'|trans }}">
+                    <td>
+                        {% if is_granted('VIEW', book) %}
+                            <a href="{{ url('book_show', {id: book.id}) }}" title="{{ 'action.show'|trans }}">
+                                {{ book.title}}
+                            </a>
+                        {% else %}
                             {{ book.title}}
-                        </a></td>
+                        {% endif %}
+                    </td>
                     <td>{{ book.author }}</td>
                     <td>{{ book.description }}</td>
                     <td>{{ book.createdAt|format_date('long') }}</td>
@@ -105,17 +112,17 @@
                                 {{ '-' }}
                             {% endif %}
                         </td>
-                        <td>
+{#                        <td>#}
 
-                            <br>
-                            <a href="{{ url('book_edit', {id: book.id}) }}" title="{{ 'action.edit'|trans }}">
-                                {{ 'action.edit'|trans }}
-                            </a>
-                            <br>
-                            <a href="{{ url('book_delete', {id: book.id}) }}" title="{{ 'action.delete'|trans }}">
-                                {{ 'action.delete'|trans }}
-                            </a>
-                        </td>
+{#                            <br>#}
+{#                            <a href="{{ url('book_edit', {id: book.id}) }}" title="{{ 'action.edit'|trans }}">#}
+{#                                {{ 'action.edit'|trans }}#}
+{#                            </a>#}
+{#                            <br>#}
+{#                            <a href="{{ url('book_delete', {id: book.id}) }}" title="{{ 'action.delete'|trans }}">#}
+{#                                {{ 'action.delete'|trans }}#}
+{#                            </a>#}
+{#                        </td>#}
                     {% endif %}
                 </tr>
             {% endfor %}
