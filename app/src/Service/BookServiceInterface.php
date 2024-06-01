@@ -9,6 +9,7 @@ use App\Dto\BookListInputFiltersDto;
 use App\Entity\Book;
 use App\Entity\Category;
 use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\Paginator;
 
 /**
  * Interface BookServiceInterface.

@@ -8,14 +8,14 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class BookVoter extends Voter
+class ProfileVoter extends Voter
 {
     /**
      * View permission.
      *
      * @const string
      */
-    private const VIEW = 'VIEW';
+    private const VIEW = 'view_profile';
 
     /**
      * Determines if the attribute and subject are supported by this voter.
@@ -28,7 +28,7 @@ class BookVoter extends Voter
     protected function supports(string $attribute, mixed $subject): bool
     {
         return in_array($attribute, [self::VIEW])
-            && $subject instanceof Book;
+            && $subject instanceof User;
     }
 
     /**
@@ -43,31 +43,19 @@ class BookVoter extends Voter
      */
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
-        $user = $token->getUser();
-        if (!$user instanceof UserInterface) {
-            return false;
-        }
-        if (!$subject instanceof Book) {
+        $authenticatedUser = $token->getUser();
+
+        if (!$authenticatedUser instanceof User) {
+            // the user must be logged in; if not, deny access
             return false;
         }
 
-        return match ($attribute) {
-            self::VIEW => $this->canView($subject, $user),
-            default => false,
-        };
+        // Check if the user is viewing their own profile
+        /** @var User $profileUser */
+        $profileUser = $subject;
+
+        return $authenticatedUser->getId() === $profileUser->getId();
     }
-    /**
-     * Checks if user can view book.
-     *
-     * @param Book          $book Book entity
-     * @param UserInterface $user User
-     *
-     * @return bool Result
-     */
-    private function canView(Book $book, UserInterface $user): bool
-    {
-        // Check if the user is blocked
-        return !$user->isBlocked();
-    }
+
 
 }

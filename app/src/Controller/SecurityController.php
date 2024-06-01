@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Enum\UserRole;
 use App\Entity\User;
-use App\Form\Type\UserRoleType;
 use App\Form\Type\UserType;
+use App\Repository\BookRepository;
 use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -121,9 +121,6 @@ class SecurityController extends AbstractController
     }//end show()
 
 
-    /**
-     * TODO: user profile
-    */
 
     /**
      * Edit action.
@@ -174,8 +171,37 @@ class SecurityController extends AbstractController
         );
 
     }//end edit()
+
     /**
-     * Edit action.
+     * Profile action.
+    */
+
+    #[Route(
+        'profile/{id}',
+        name: 'user_profile',
+        requirements: ['id' => '[1-9]\d*'],
+        methods: 'GET|PUT'
+    )]
+    public function profile (User $user, Request $request, BookRepository $bookRepository):Response{
+
+        // Check if the current user can view the profile
+        $this->denyAccessUnlessGranted('view_profile', $user);
+
+        // Fetch the books owned by the user
+        $books = $bookRepository->findBy(['owner' => $user]);
+
+
+        return $this->render(
+            'profile/index.html.twig',
+            [
+                'user' => $user,
+                'books' => $books,
+
+            ]
+        );
+    }
+    /**
+     * Change action.
      *
      * @param Request  $request  HTTP request
      * @param User $user User entity
@@ -191,7 +217,7 @@ class SecurityController extends AbstractController
     public function change(Request $request, User $user): Response
     {
         $form = $this->createForm(
-            UserRoleType::class,
+            UserType::class,
             $user,
             [
                 'method' => 'PUT',
