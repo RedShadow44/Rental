@@ -6,6 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Rental;
+use App\Entity\User;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\Paginator;
 /**
@@ -28,7 +29,7 @@ public function getPaginatedByStatus(int $page): PaginationInterface;
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedByOwner(int $page): PaginationInterface;
+    public function getPaginatedByOwner(int $page, User $user): PaginationInterface;
 
     /**
      * Save entity.

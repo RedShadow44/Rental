@@ -10,6 +10,7 @@ use App\Dto\BookListInputFiltersDto;
 use App\Entity\Book;
 use App\Entity\Category;
 use App\Entity\Rental;
+use App\Entity\User;
 use App\Repository\RentalRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -67,15 +68,16 @@ class RentalService implements RentalServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedByOwner(int $page): PaginationInterface
+    public function getPaginatedByOwner(int $page, User $user): PaginationInterface
     {
 
         return $this->paginator->paginate(
-            $this->rentalRepository->queryByOwner(),
+            $this->rentalRepository->queryByOwner($user),
             $page,
             self::PAGINATOR_ITEMS_PER_PAGE
         );
     }// end getPaginatedList()
+
     /**
      * Save entity.
      *

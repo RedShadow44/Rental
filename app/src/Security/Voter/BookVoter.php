@@ -16,6 +16,7 @@ class BookVoter extends Voter
      * @const string
      */
     private const VIEW = 'VIEW';
+    private const RENT = 'RENT';
 
     /**
      * Determines if the attribute and subject are supported by this voter.
@@ -27,7 +28,7 @@ class BookVoter extends Voter
      */
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return in_array($attribute, [self::VIEW])
+        return in_array($attribute, [self::VIEW, self::RENT])
             && $subject instanceof Book;
     }
 
@@ -53,6 +54,7 @@ class BookVoter extends Voter
 
         return match ($attribute) {
             self::VIEW => $this->canView($subject, $user),
+            self::RENT => $this->canRent($subject, $user),
             default => false,
         };
     }
@@ -70,4 +72,17 @@ class BookVoter extends Voter
         return !$user->isBlocked();
     }
 
+    /**
+     * Checks if user can view book.
+     *
+     * @param Book          $book Book entity
+     * @param UserInterface $user User
+     *
+     * @return bool Result
+     */
+    private function canRent(Book $book, UserInterface $user): bool
+    {
+        // Check if the user is blocked
+        return !$user->isBlocked();
+    }
 }

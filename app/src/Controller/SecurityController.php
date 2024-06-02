@@ -6,6 +6,7 @@ use App\Entity\Enum\UserRole;
 use App\Entity\User;
 use App\Form\Type\UserType;
 use App\Repository\BookRepository;
+use App\Service\RentalServiceInterface;
 use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +25,7 @@ class SecurityController extends AbstractController
     /**
      * Constructor.
      */
-    public function __construct(private readonly UserServiceInterface $userService, private readonly TranslatorInterface $translator, private readonly UserPasswordHasherInterface $passwordHasher)
+    public function __construct(private readonly UserServiceInterface $userService, private readonly TranslatorInterface $translator, private readonly UserPasswordHasherInterface $passwordHasher, private readonly RentalServiceInterface $rentalService)
     {
     }
     #[Route(path: '/login', name: 'app_login')]
@@ -182,20 +183,21 @@ class SecurityController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET|PUT'
     )]
-    public function profile (User $user, Request $request, BookRepository $bookRepository):Response{
+    public function profile (User $user,  #[MapQueryParameter] int $page = 1):Response{
 
         // Check if the current user can view the profile
         $this->denyAccessUnlessGranted('view_profile', $user);
 
         // Fetch the books owned by the user
-        $books = $bookRepository->findBy(['owner' => $user]);
+        //$books = $bookRepository->findBy(['owner' => $user]);
+        $pagination = $this->rentalService->getPaginatedByStatus($page, $user);
 
 
         return $this->render(
             'profile/index.html.twig',
             [
                 'user' => $user,
-                'books' => $books,
+                'pagination' => $pagination,
 
             ]
         );

@@ -31,7 +31,7 @@ class RentalController extends AbstractController
     /**
      * Constructor.
      */
-    public function __construct(private readonly RentalServiceInterface $rentalService, private readonly TranslatorInterface $translator)
+    public function __construct(private readonly RentalServiceInterface $rentalService,private readonly BookServiceInterface $bookService, private readonly TranslatorInterface $translator)
     {
 
     }//end __construct()
@@ -42,6 +42,7 @@ class RentalController extends AbstractController
      * @param Book $book
      * @return Response
      */
+    #[IsGranted('RENT', subject: 'book')]
     #[Route('/{id}/rent', name: 'rent', requirements: ['id' => '[1-9]\d*'], methods: 'GET|POST')]
     #[IsGranted('ROLE_USER')]
     public function rent(Request $request, Book $book): Response
@@ -57,6 +58,7 @@ class RentalController extends AbstractController
         $book->setAvailable(false);
 
         $this->rentalService->save($rental);
+        $this->bookService->save($book);
 
         $this->addFlash(
             'success',
@@ -74,4 +76,50 @@ class RentalController extends AbstractController
 
     }//end rent()
 
+
+    /**
+     * Index action.
+     *
+     *  @param integer $page Page number
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/rent_index', name: 'rent_index', requirements: ['id' => '[1-9]\d*'], methods: 'GET|POST')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function index(#[MapQueryParameter] int $page = 1): Response
+    {
+        $pagination = $this->rentalService->getPaginatedByStatus($page);
+
+        return $this->render('rental/index.html.twig', ['pagination' => $pagination]);
+
+    }
+
+    /**
+     * Approve action.
+     *
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/rent_approve', name: 'rent_approve', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function approve(Request $request, Rental $rental): Response
+    {
+
+        $user = $this->getUser();
+
+        $rental->setStatus(true);
+
+        $book = $rental->getBook();
+        $book->setOwner($user);
+
+        $this->rentalService->save($rental);
+        $this->bookService->save($book);
+
+        $this->addFlash(
+            'success',
+            $this->translator->trans('message.rental_approved')
+        );
+
+        return $this->redirectToRoute('rent_index');
+    }
 }//end class
