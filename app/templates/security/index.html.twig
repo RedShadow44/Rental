@@ -13,7 +13,7 @@
             {{ knp_pagination_render(pagination) }}
         </div>
 
-        <a href="{{  url('register')}}" title="{{ 'action.create_user'|trans }}">
+        <a class="btn btn-outline-primary" href="{{  url('register')}}" title="{{ 'action.create_user'|trans }}">
             {{ 'action.create_user'|trans }}
         </a>
 
@@ -50,7 +50,7 @@
 {#                    </td>#}
 
                     <td>
-                        <a href="{{ url('user_show', {id: user.id}) }}" title="{{ 'action.show'|trans }}">
+                        <a class="btn btn-outline-primary" href="{{ url('user_show', {id: user.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
                         <br>

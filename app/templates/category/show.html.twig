@@ -28,18 +28,18 @@
         </p>
 
         <h2>{{ 'title.books_for_category'|trans }}</h2>
-        {% if books is defined and books|length %}
+        {% if pagination is defined and pagination.items|length %}
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>{{ 'label.id'|trans }}</th>
-                    <th>{{ 'label.title'|trans }}</th>
-                    <th>{{ 'label.author'|trans }}</th>
-                    <th>{{ 'label.description'|trans }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'book.id') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'book.title') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'label.author'|trans, 'book.author') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'label.description'|trans, 'book.description') }}</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for book in books %}
+                {% for book in pagination.items %}
                     <tr>
                         <td>{{ book.id }}</td>
                         <td><a href="{{ url('book_show', {id: book.id}) }}" class="no_underline">{{ book.title }}</a></td>

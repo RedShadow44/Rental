@@ -47,14 +47,14 @@
             {% endif %}
 
         </dl>
-        {% if book.owner == null %}
+        {% if book.available == true %}
         <p>
 {#            <a class="btn btn-primary" href="{{ url('rent') }}"#}
 {#               title="{{ 'action.rent'|trans }}" >#}
 {#                {{ 'action.rent'|trans }}#}
 {#            </a>#}
 
-            <a class="btn btn-primary"
+            <a class="btn btn-primary" href="{{ url('rent', {id: book.id}) }}"
                title="{{ 'action.rent'|trans }}" >
                 {{ 'action.rent'|trans }}
             </a>

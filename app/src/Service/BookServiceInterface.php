@@ -27,13 +27,16 @@ interface BookServiceInterface
     public function getPaginatedList(int $page, BookListInputFiltersDto $filters): PaginationInterface;
 
     /**
-     * Get all tasks for category.
+     * Get paginated books for category.
      *
      * @param Category $category Category
+     * @param int $page Page number
      *
-     * @return array books for category
+     *  @return PaginationInterface<string, mixed> Paginated list
      */
-    public function findBooksForCategory(Category $category): array;
+//    public function findBooksForCategory(Category $category): array;
+
+    public function getPaginatedBooksForCategory(int $page, Category $category): PaginationInterface;
 
     /**
      * Save entity.

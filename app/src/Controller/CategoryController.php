@@ -46,7 +46,7 @@ class CategoryController extends AbstractController
      * @return Response HTTP response
      */
     #[Route(name: 'category_index', methods: 'GET')]
-    public function index(#[MapQueryParameter] int $page=1): Response
+    public function index(#[MapQueryParameter] int $page = 1): Response
     {
         $pagination = $this->categoryService->getPaginatedList($page);
 
@@ -68,11 +68,11 @@ class CategoryController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
-    public function show(Category $category): Response
+    public function show(Category $category, #[MapQueryParameter] int $page = 1): Response
     {
-        $books = $this->bookService->findBooksForCategory($category);
+        $pagination = $this->bookService->getPaginatedBooksForCategory($page, $category);
 
-        return $this->render('category/show.html.twig', ['category' => $category, 'books' => $books]);
+        return $this->render('category/show.html.twig', ['category' => $category, 'pagination' => $pagination]);
 
     }//end show()
 

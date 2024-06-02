@@ -232,7 +232,7 @@
 
      <trans-unit id="action.category">
         <source>action.category</source>
-        <target>Categorys</target>
+        <target>Categories</target>
      </trans-unit>
 
      <trans-unit id="action.tag">
@@ -253,6 +253,116 @@
      <trans-unit id="message.create_account">
         <source>message.create_account</source>
         <target>Create new account</target>
+     </trans-unit>
+
+     <trans-unit id="message.cannot_revoke_last_admin">
+        <source>message.cannot_revoke_last_admin</source>
+        <target>Can not revoke last admin</target>
+     </trans-unit>
+
+     <trans-unit id="message.role_revoked_successfully">
+        <source>message.role_revoked_successfully</source>
+        <target>Role revoked successfully</target>
+     </trans-unit>
+
+     <trans-unit id="message.user_blocked_successfully">
+        <source>message.user_blocked_successfully</source>
+        <target>User blocked successfully</target>
+     </trans-unit>
+
+     <trans-unit id="message.user_unblocked_successfully">
+        <source>message.user_unblocked_successfully</source>
+        <target>User unblocked successfully</target>
+     </trans-unit>
+
+     <trans-unit id="label.clear_filters">
+        <source>label.clear_filters</source>
+        <target>Clear filters</target>
+     </trans-unit>
+
+     <trans-unit id="action.rent">
+        <source>action.rent</source>
+        <target>Rent</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_edit">
+        <source>title.user_edit</source>
+        <target>Edit user</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_list">
+        <source>title.user_list</source>
+        <target>User list</target>
+     </trans-unit>
+
+     <trans-unit id="action.create_user">
+        <source>action.create_user</source>
+        <target>Create user</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_details">
+        <source>title.user_details</source>
+        <target>User details</target>
+     </trans-unit>
+
+     <trans-unit id="label.role">
+        <source>label.role</source>
+        <target>Role</target>
+     </trans-unit>
+
+     <trans-unit id="label.blocked">
+        <source>label.blocked</source>
+        <target>Blocked</target>
+     </trans-unit>
+
+     <trans-unit id="action.set_admin">
+        <source>action.set_admin</source>
+        <target>Set admin</target>
+     </trans-unit>
+
+     <trans-unit id="action.revoke_admin">
+        <source>action.revoke_admin</source>
+        <target>Revoke admin</target>
+     </trans-unit>
+
+     <trans-unit id="action.block">
+        <source>action.block</source>
+        <target>Block</target>
+     </trans-unit>
+
+     <trans-unit id="action.unblock">
+        <source>action.unblock</source>
+        <target>Unblock</target>
+     </trans-unit>
+
+     <trans-unit id="action.user">
+        <source>action.user</source>
+        <target>Users</target>
+     </trans-unit>
+
+     <trans-unit id="title.avatar">
+        <source>title.avatar</source>
+        <target>Avatar</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_profile">
+        <source>title.user_profile</source>
+        <target>User profile</target>
+     </trans-unit>
+
+     <trans-unit id="action.avatar">
+        <source>action.avatar</source>
+        <target>Avatar</target>
+     </trans-unit>
+
+     <trans-unit id="label.yes">
+        <source>label.yes</source>
+        <target>Yes</target>
+     </trans-unit>
+
+     <trans-unit id="label.no">
+        <source>label.no</source>
+        <target>No</target>
      </trans-unit>
 
 <!--      <trans-unit id=""> -->

@@ -16,6 +16,14 @@
             <a class="btn btn-outline-primary" href="{{ url('user_change_data', {id: user.id}) }}" title="{{ 'action.edit'|trans }}">
                 {{ 'action.edit'|trans }}
             </a>
+
+            <a class="btn btn-outline-primary" href="{{ url('avatar_create', {id: user.id}) }}" title="{{ 'action.avatar'|trans }}">
+                {{ 'action.avatar'|trans }}
+            </a>
+
+{#            <a class="btn btn-outline-primary" href="{{ url('avatar_edit', {id: user.id}) }}" title="{{ 'action.avatar_edit'|trans }}">#}
+{#                {{ 'action.avatar_edit'|trans }}#}
+{#            </a>#}
         </p>
 
         <h3>{{ 'label.books_owned'|trans }}</h3>

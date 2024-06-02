@@ -1,6 +1,6 @@
 <?php
 /**
- * Task service.
+ * Book service.
  */
 
 namespace App\Service;
@@ -17,7 +17,7 @@ use Knp\Component\Pager\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Class TaskService.
+ * Class BookService.
  */
 class BookService implements BookServiceInterface
 {
@@ -64,16 +64,25 @@ class BookService implements BookServiceInterface
     }// end getPaginatedList()
 
     /**
-     * Get all tasks for category.
+     * Get paginated books for category.
      *
      * @param Category $category Category
+     * @param int $page Page number
      *
-     * @return array books for category
-     */
-    public function findBooksForCategory(Category $category): array
+     *  @return PaginationInterface<string, mixed> Paginated list
+    */
+//    public function findBooksForCategory(Category $category): array
+//    {
+//        return $this->bookRepository->findBooksForCategory($category);
+//    }// end findBooksForCategory()
+    public function getPaginatedBooksForCategory(int $page, Category $category): PaginationInterface
     {
-        return $this->bookRepository->findBooksForCategory($category);
-    }// end findBooksForCategory()
+        return $this->paginator->paginate(
+            $this->bookRepository->findBooksForCategory($category),
+            $page,
+            self::PAGINATOR_ITEMS_PER_PAGE
+        );
+    }
 
     /**
      * Save entity.

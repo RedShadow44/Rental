@@ -98,7 +98,7 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if book.owner == null%}
+                        {% if book.available == true %}
                             {{ 'message.available' }}
                         {% else %}
                             {{ 'message.not_available' }}

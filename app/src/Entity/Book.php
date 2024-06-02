@@ -93,6 +93,10 @@ class Book
 
     #[ORM\ManyToOne]
     private ?User $owner = null;
+
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    private ?bool $available = true;
     /**
      * Constructor.
      */
@@ -276,10 +280,20 @@ class Book
      *
      * @param User|null $owner Owner
      */
-    public function setOwner(?User $owner): static
+    public function setOwner(?User $owner): void
     {
         $this->owner = $owner;
 
-        return $this;
+    }
+
+    public function isAvailable(): ?bool
+    {
+        return $this->available;
+    }
+
+    public function setAvailable(bool $available): void
+    {
+        $this->available = $available;
+
     }
 }

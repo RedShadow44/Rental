@@ -51,10 +51,12 @@ class BookFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             }
 
             /* @var User $owner */
-            for ($i = rand(1,2); $i < 2; $i++) {
-                $owner = $this->getRandomReference('users');
-                $book->setOwner($owner);
-            }
+//            for ($i = rand(1,2); $i < 2; $i++) {
+//                $owner = $this->getRandomReference('users');
+//                $book->setOwner($owner);
+//            }
+
+//            $book ->setAvailable(false);
 
             return $book;
         });

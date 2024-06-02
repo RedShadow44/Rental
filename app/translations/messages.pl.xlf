@@ -254,6 +254,117 @@
             <source>message.create_account</source>
             <target>Stwórz nowe konto</target>
          </trans-unit>
+
+     <trans-unit id="message.cannot_revoke_last_admin">
+        <source>message.cannot_revoke_last_admin</source>
+        <target>Nie można usunąć ostatniego administratora</target>
+     </trans-unit>
+
+     <trans-unit id="message.role_revoked_successfully">
+        <source>message.role_revoked_successfully</source>
+        <target>Rola została odebrana</target>
+     </trans-unit>
+
+     <trans-unit id="message.user_blocked_successfully">
+        <source>message.user_blocked_successfully</source>
+        <target>Użytkownik został zablokowany</target>
+     </trans-unit>
+
+     <trans-unit id="message.user_unblocked_successfully">
+        <source>message.user_unblocked_successfully</source>
+        <target>Użytkownik został odblokowany</target>
+     </trans-unit>
+
+     <trans-unit id="label.clear_filters">
+        <source>label.clear_filters</source>
+        <target>Wyczyść filtry</target>
+     </trans-unit>
+
+     <trans-unit id="action.rent">
+        <source>action.rent</source>
+        <target>Wypożycz</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_edit">
+        <source>title.user_edit</source>
+        <target>Edytuj użytkownika</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_list">
+        <source>title.user_list</source>
+        <target>Lista użytkowników</target>
+     </trans-unit>
+
+     <trans-unit id="action.create_user">
+        <source>action.create_user</source>
+        <target>Stwórz nowego użytkownika</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_details">
+        <source>title.user_details</source>
+        <target>Szczegóły użytkownika</target>
+     </trans-unit>
+
+     <trans-unit id="label.role">
+        <source>label.role</source>
+        <target>Role</target>
+     </trans-unit>
+
+     <trans-unit id="label.blocked">
+        <source>label.blocked</source>
+        <target>Zablokowany</target>
+     </trans-unit>
+
+     <trans-unit id="action.set_admin">
+        <source>action.set_admin</source>
+        <target>Nadaj administratora</target>
+     </trans-unit>
+
+     <trans-unit id="action.revoke_admin">
+        <source>action.revoke_admin</source>
+        <target>Odbierz administratora</target>
+     </trans-unit>
+
+     <trans-unit id="action.block">
+        <source>action.block</source>
+        <target>Zablokuj</target>
+     </trans-unit>
+
+     <trans-unit id="action.unblock">
+        <source>action.unblock</source>
+        <target>Odblokuj</target>
+     </trans-unit>
+
+     <trans-unit id="action.user">
+        <source>action.user</source>
+        <target>Użytkownicy</target>
+     </trans-unit>
+
+     <trans-unit id="title.avatar">
+        <source>title.avatar</source>
+        <target>Avatar</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_profile">
+        <source>title.user_profile</source>
+        <target>Profil użytkownika</target>
+     </trans-unit>
+
+     <trans-unit id="action.avatar">
+        <source>action.avatar</source>
+        <target>Avatar</target>
+     </trans-unit>
+
+     <trans-unit id="label.yes">
+        <source>label.yes</source>
+        <target>Tak</target>
+     </trans-unit>
+
+     <trans-unit id="label.no">
+        <source>label.no</source>
+        <target>Nie</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->
