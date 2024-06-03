@@ -102,10 +102,10 @@ class RentalController extends AbstractController
      */
     #[Route('/{id}/rent_approve', name: 'rent_approve', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     #[IsGranted('ROLE_ADMIN')]
-    public function approve(Request $request, Rental $rental): Response
+    public function approve(Rental $rental): Response
     {
 
-        $user = $this->getUser();
+        $user = $rental->getOwner();
 
         $rental->setStatus(true);
 
@@ -121,5 +121,25 @@ class RentalController extends AbstractController
         );
 
         return $this->redirectToRoute('rent_index');
+    }
+
+
+    #[Route('/{id}/rent_deny', name: 'rent_deny', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT|DELETE')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function deny(Rental $rental): Response
+    {
+        $book = $rental->getBook();
+
+        $book->setAvailable(true);
+        $this->rentalService->delete($rental);
+        $this->bookService->save($book);
+
+        $this->addFlash(
+            'success',
+            $this->translator->trans('message.rental_denied')
+        );
+        return $this->redirectToRoute(
+            'rent_index'
+        );
     }
 }//end class

@@ -82,7 +82,9 @@ class BookController extends AbstractController
      * @param Request $request HTTP request
      *
      * @return Response HTTP response
+     *
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route(
         '/create',
         name: 'book_create',
@@ -119,6 +121,7 @@ class BookController extends AbstractController
      *
      * @return Response HTTP response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route(
         '/{id}/edit',
         name: 'book_edit',
@@ -165,6 +168,7 @@ class BookController extends AbstractController
      *
      * @return Response HTTP response
      */
+    #[IsGranted('ROLE_ADMIN')]
     #[Route(
         '/{id}/delete',
         name: 'book_delete',

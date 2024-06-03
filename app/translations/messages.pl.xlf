@@ -365,6 +365,101 @@
         <target>Nie</target>
      </trans-unit>
 
+     <trans-unit id="message.rented_successfully">
+        <source>message.rented_successfully</source>
+        <target>Wypożyczono</target>
+     </trans-unit>
+
+     <trans-unit id="message.rental_approved">
+        <source>message.rental_approved</source>
+        <target>Wypożyczenie zaakceptowane</target>
+     </trans-unit>
+
+     <trans-unit id="message.rental_denied">
+        <source>message.rental_denied</source>
+        <target>Wypożyczenie odrzucone</target>
+     </trans-unit>
+
+     <trans-unit id="message.changed_successfully">
+        <source>message.changed_successfully</source>
+        <target>Zmiany zapisane pomyślnie</target>
+     </trans-unit>
+
+     <trans-unit id="label.available">
+        <source>label.available</source>
+        <target>Dostępność</target>
+     </trans-unit>
+
+     <trans-unit id="label.owner">
+        <source>label.owner</source>
+        <target>Właściciel</target>
+     </trans-unit>
+
+     <trans-unit id="action.rent_index">
+        <source>action.rent_index</source>
+        <target>Wypożyczenia</target>
+     </trans-unit>
+
+     <trans-unit id="title.rental_list">
+        <source>title.rental_list</source>
+        <target>Lista wypożyczeń</target>
+     </trans-unit>
+
+     <trans-unit id="action.rental_approve">
+        <source>action.rental_approve</source>
+        <target>Akceptuj</target>
+     </trans-unit>
+
+     <trans-unit id="action.rental_deny">
+        <source>action.rental_deny</source>
+        <target>Odrzuć</target>
+     </trans-unit>
+
+     <trans-unit id="action.user_change_data">
+        <source>action.user_change_data</source>
+        <target>Edytuj dane</target>
+     </trans-unit>
+
+     <trans-unit id="action.user_change_pass">
+        <source>action.user_change_pass</source>
+        <target>Zmień hasło</target>
+     </trans-unit>
+
+     <trans-unit id="label.books_owned">
+        <source>label.books_owned</source>
+        <target>Wypożyczone książki</target>
+     </trans-unit>
+
+     <trans-unit id="label.status">
+        <source>label.status</source>
+        <target>Status</target>
+     </trans-unit>
+
+     <trans-unit id="message.available">
+        <source>message.available</source>
+        <target>Dostępne</target>
+     </trans-unit>
+
+     <trans-unit id="message.not_available">
+        <source>message.not_available</source>
+        <target>Nie dostępne</target>
+     </trans-unit>
+
+     <trans-unit id="message.awaiting">
+        <source>message.awaiting</source>
+        <target>Oczekuje na zatwierdzenie</target>
+     </trans-unit>
+
+     <trans-unit id="message.approved">
+        <source>message.approved</source>
+        <target>Zatwierdzone</target>
+     </trans-unit>
+
+     <trans-unit id="label.rentalDate">
+        <source>label.rentalDate</source>
+        <target>Data wypożyczenia</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

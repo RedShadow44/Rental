@@ -22,11 +22,11 @@ class RentalRepository extends ServiceEntityRepository
 
 
     /**
-     * Query rental by status
+     * Query all
      *
      * @return QueryBuilder Query builder
      */
-    public function queryByStatus(): QueryBuilder
+    public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
             ->select (
@@ -35,7 +35,18 @@ class RentalRepository extends ServiceEntityRepository
                 'partial book.{id, title}'
             )
             ->join('rental.book', 'book')
-            ->join('rental.owner', 'user')
+            ->join('rental.owner', 'user');
+
+    }
+
+    /**
+     * Query rental by status
+     *
+     * @return QueryBuilder Query builder
+     */
+    public function queryByStatus(): QueryBuilder
+    {
+       return $this->queryAll()
             ->where ('rental.status = :status')
             ->setParameter('status', false);
 
@@ -45,19 +56,11 @@ class RentalRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    public function queryByOwner(User $user): QueryBuilder
+    public function queryByOwner($owner): QueryBuilder
     {
-        return $this->getOrCreateQueryBuilder()
-            ->select (
-                'partial rental.{id, owner, book, status, rentalDate}',
-                'partial user.{id, email}',
-                'partial book.{id, title, owner}'
-            )
-            ->join('rental.book', 'book')
-            ->join('rental.owner', 'user')
-            ->where('rental.owner = :user')
-            ->andWhere('book.owner = :user')
-            ->setParameter('user', $user);
+        return $this->queryAll()
+            ->where('rental.owner = :owner')
+            ->setParameter('owner', $owner);
 
 
     }

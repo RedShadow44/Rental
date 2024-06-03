@@ -29,7 +29,7 @@ public function getPaginatedByStatus(int $page): PaginationInterface;
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedByOwner(int $page, User $user): PaginationInterface;
+    public function getPaginatedByOwner(int $page, int $owner): PaginationInterface;
 
     /**
      * Save entity.

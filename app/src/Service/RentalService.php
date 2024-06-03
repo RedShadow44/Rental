@@ -68,11 +68,11 @@ class RentalService implements RentalServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedByOwner(int $page, User $user): PaginationInterface
+    public function getPaginatedByOwner(int $page, int $owner): PaginationInterface
     {
 
         return $this->paginator->paginate(
-            $this->rentalRepository->queryByOwner($user),
+            $this->rentalRepository->queryByOwner($owner),
             $page,
             self::PAGINATOR_ITEMS_PER_PAGE
         );

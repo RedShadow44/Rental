@@ -32,9 +32,14 @@
                     <td>{{ rental.id }}</td>
                     <td>{{ rental.owner.email }}</td>
                     <td>{{ rental.book.title}}</td>
-                    <td><a class="btn btn-outline-primary" style="margin-top:10px" href="{{  url('rent_approve', {id:rental.id})}}" title="{{ 'action.rental_approve'|trans }}">
+                    <td>
+                        <a class="btn btn-outline-primary" style="margin-top:10px" href="{{  url('rent_approve', {id:rental.id})}}" title="{{ 'action.rental_approve'|trans }}">
                             {{ 'action.rental_approve'|trans }}
-                        </a></td>
+                        </a>
+                        <a class="btn btn-outline-primary" style="margin-top:10px" href="{{  url('rent_deny', {id:rental.id})}}" title="{{ 'action.rental_deny'|trans }}">
+                            {{ 'action.rental_deny'|trans }}
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
 

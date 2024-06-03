@@ -1,29 +1,24 @@
 <?php
 /**
- * User role edit type.
+ * User Password type.
+ *
  */
 
 namespace App\Form\Type;
 
-use App\Entity\Enum\UserRole;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Class UserRoleType.
+ * Password Type.
  */
-class UserRoleType extends AbstractType
+class PasswdType extends AbstractType
 {
-
-
     /**
      * Builds the form.
      *
@@ -37,42 +32,29 @@ class UserRoleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add(
-            'email',
-            EmailType::class,
-            [
-                'label'    => 'label.email',
+
+
+        $builder
+//            ->add('currentPassword', PasswordType::class, [
+//                'mapped' => false,
+//                'label' => 'label.current_password',
+//                'constraints' => [
+//                    new NotBlank([
+//                        'message' => 'message.enter_current_password',
+//                    ]),
+//                ],
+//            ])
+
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'mapped' => false,
+                'invalid_message' => 'message.passwords_must_match',
+                'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-            ]
-        );
-
-        $builder->add(
-            'password',
-            PasswordType::class,
-            [
-                'label'    => 'label.password',
-                'required' => true,
-            ]
-        );
-
-        $builder->add(
-            'roles',
-            EntityType::class,
-            [
-                'class' => User::class,
-                'choice_label' => function ($user): array {
-                    return $user->getRoles();
-                },
-                'label' => 'label.roles',
-                'placeholder' => 'label.none',
-                'required' => false,
-                'expanded' => true,
-                'multiple' => true,
-            ]
-        );
-
+                'first_options'  => ['label' => 'Password'],
+                'second_options' => ['label' => 'Repeat Password'],
+            ]);
     }
-
 
     /**
      * Configures the options for this type.
@@ -82,9 +64,7 @@ class UserRoleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(['data_class' => User::class]);
-
     }
-
 
     /**
      * Returns the prefix of the template block name for this type.
@@ -97,8 +77,5 @@ class UserRoleType extends AbstractType
     public function getBlockPrefix(): string
     {
         return 'user';
-
     }
-
-
 }

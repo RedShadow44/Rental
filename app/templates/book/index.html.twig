@@ -39,8 +39,8 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'book.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
                 <th>{{ 'label.tags'|trans }}</th>
-
-                <th>{{ 'label.available'|trans }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.available'|trans, 'book.available', {'direction': 'desc'}) }}</th>
+{#                <th>{{ 'label.available'|trans }}</th>#}
 
 
             {% if is_granted('ROLE_ADMIN') %}
@@ -99,9 +99,9 @@
                     </td>
                     <td>
                         {% if book.available == true %}
-                            {{ 'message.available' }}
+                            {{ 'message.available'|trans }}
                         {% else %}
-                            {{ 'message.not_available' }}
+                            {{ 'message.not_available'|trans }}
                         {% endif %}
                     </td>
                     {% if is_granted('ROLE_ADMIN') %}

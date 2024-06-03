@@ -13,8 +13,12 @@
         </dl>
 
         <p>
-            <a class="btn btn-outline-primary" href="{{ url('user_change_data', {id: user.id}) }}" title="{{ 'action.edit'|trans }}">
-                {{ 'action.edit'|trans }}
+            <a class="btn btn-outline-primary" href="{{ url('user_change_data', {id: user.id}) }}" title="{{ 'action.user_change_data'|trans }}">
+                {{ 'action.user_change_data'|trans }}
+            </a>
+
+            <a class="btn btn-outline-primary" href="{{ url('user_change_pass', {id: user.id}) }}" title="{{ 'action.user_change_pass'|trans }}">
+                {{ 'action.user_change_pass'|trans }}
             </a>
 
             <a class="btn btn-outline-primary" href="{{ url('avatar_create', {id: user.id}) }}" title="{{ 'action.avatar'|trans }}">
@@ -39,6 +43,8 @@
             <tr>
 
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'rental.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.rentalDate'|trans, 'rental.rentalDate') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.status'|trans, 'rental.status') }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
 
 
@@ -51,10 +57,13 @@
                         {{ rental.book.title}}
                     </td>
                     <td>
-                        {% if rental == true %}
-                            {{ 'message.awaiting' }}
+                        {{ rental.rentalDate|format_date('long')}}
+                    </td>
+                    <td>
+                        {% if rental.status == false %}
+                            {{ 'message.awaiting'|trans }}
                         {% else %}
-                            {{ 'message.approved' }}
+                            {{ 'message.approved'|trans }}
                         {% endif %}
                     </td>
 

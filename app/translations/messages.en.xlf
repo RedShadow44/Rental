@@ -365,6 +365,101 @@
         <target>No</target>
      </trans-unit>
 
+     <trans-unit id="message.rented_successfully">
+        <source>message.rented_successfully</source>
+        <target>Rented successfully</target>
+     </trans-unit>
+
+     <trans-unit id="message.rental_approved">
+        <source>message.rental_approved</source>
+        <target>Rental approved</target>
+     </trans-unit>
+
+     <trans-unit id="message.rental_denied">
+        <source>message.rental_denied</source>
+        <target>Rental denied</target>
+     </trans-unit>
+
+     <trans-unit id="message.changed_successfully">
+        <source>message.changed_successfully</source>
+        <target>Changed successfully</target>
+     </trans-unit>
+
+     <trans-unit id="label.available">
+        <source>label.available</source>
+        <target>Available</target>
+     </trans-unit>
+
+     <trans-unit id="label.owner">
+        <source>label.owner</source>
+        <target>Owner</target>
+     </trans-unit>
+
+     <trans-unit id="action.rent_index">
+        <source>action.rent_index</source>
+        <target>Rentals</target>
+     </trans-unit>
+
+     <trans-unit id="title.rental_list">
+        <source>title.rental_list</source>
+        <target>Rental list</target>
+     </trans-unit>
+
+     <trans-unit id="action.rental_approve">
+        <source>action.rental_approve</source>
+        <target>Approve</target>
+     </trans-unit>
+
+     <trans-unit id="action.rental_deny">
+        <source>action.rental_deny</source>
+        <target>Deny</target>
+     </trans-unit>
+
+     <trans-unit id="action.user_change_data">
+        <source>action.user_change_data</source>
+        <target>Change personal info</target>
+     </trans-unit>
+
+     <trans-unit id="action.user_change_pass">
+        <source>action.user_change_pass</source>
+        <target>Change password</target>
+     </trans-unit>
+
+     <trans-unit id="label.books_owned">
+        <source>label.books_owned</source>
+        <target>Rented books</target>
+     </trans-unit>
+
+     <trans-unit id="label.status">
+        <source>label.status</source>
+        <target>Status</target>
+     </trans-unit>
+
+     <trans-unit id="message.available">
+        <source>message.available</source>
+        <target>Available</target>
+     </trans-unit>
+
+     <trans-unit id="message.not_available">
+        <source>message.not_available</source>
+        <target>Not available</target>
+     </trans-unit>
+
+     <trans-unit id="message.awaiting">
+        <source>message.awaiting</source>
+        <target>Awaiting</target>
+     </trans-unit>
+
+     <trans-unit id="message.approved">
+        <source>message.approved</source>
+        <target>Approved</target>
+     </trans-unit>
+
+     <trans-unit id="label.rentalDate">
+        <source>label.rentalDate</source>
+        <target>Rent date</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->
