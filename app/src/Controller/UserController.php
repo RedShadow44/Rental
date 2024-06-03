@@ -6,7 +6,6 @@ use App\Entity\Enum\UserRole;
 use App\Entity\User;
 use App\Form\Type\PasswdType;
 use App\Form\Type\UserType;
-use App\Repository\BookRepository;
 use App\Service\RentalServiceInterface;
 use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,10 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Core\Exception\DisabledException;
-use Symfony\Component\Security\Core\Exception\LockedException;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserController extends AbstractController
@@ -59,12 +54,12 @@ class UserController extends AbstractController
             'security/register.html.twig',
             ['form' => $form->createView()]
         );
-
     }
+
     /**
      * Index action.
      *
-     *  @param integer $page Page number
+     * @param int $page Page number
      *
      * @return Response HTTP response
      */
@@ -73,13 +68,14 @@ class UserController extends AbstractController
         name: 'user_index',
         methods: 'GET'
     )]
-    public function index(#[MapQueryParameter] int $page=1): Response
+    public function index(#[MapQueryParameter] int $page = 1): Response
     {
         $pagination = $this->userService->getPaginatedList($page);
 
         return $this->render('security/index.html.twig', ['pagination' => $pagination]);
+    }
 
-    }//end index()
+    // end index()
     /**
      * Show action.
      *
@@ -95,18 +91,14 @@ class UserController extends AbstractController
     )]
     public function show(User $user): Response
     {
-
         return $this->render('security/show.html.twig', ['user' => $user]);
-
-    }//end show()
-
-
+    }// end show()
 
     /**
      * Edit action.
      *
-     * @param Request  $request  HTTP request
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
@@ -146,47 +138,44 @@ class UserController extends AbstractController
             'security/edit.html.twig',
             [
                 'form' => $form->createView(),
-                'user' => $user
+                'user' => $user,
             ]
         );
-
-    }//end edit()
+    }// end edit()
 
     /**
      * Profile action.
      */
-
     #[Route(
         'profile/{id}',
         name: 'user_profile',
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET|PUT'
     )]
-    public function profile (User $user,  #[MapQueryParameter] int $page = 1):Response{
-
+    public function profile(User $user, #[MapQueryParameter] int $page = 1): Response
+    {
         // Check if the current user can view the profile
         $this->denyAccessUnlessGranted('view_profile', $user);
 
         // Fetch the books owned by the user
-        //$books = $bookRepository->findBy(['owner' => $user]);
-        $owner=$this->getUser()->getId();
+        // $books = $bookRepository->findBy(['owner' => $user]);
+        $owner = $this->getUser()->getId();
         $pagination = $this->rentalService->getPaginatedByOwner($page, $owner);
-
 
         return $this->render(
             'profile/index.html.twig',
             [
                 'user' => $user,
                 'pagination' => $pagination,
-
             ]
         );
     }
+
     /**
      * Change action.
      *
-     * @param Request  $request  HTTP request
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
@@ -211,7 +200,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
 
-            //$user->setRoles([UserRole::ROLE_USER->value]);
+            // $user->setRoles([UserRole::ROLE_USER->value]);
             $this->userService->save($user);
 
             $this->addFlash(
@@ -219,11 +208,12 @@ class UserController extends AbstractController
                 $this->translator->trans('message.changed_successfully')
             );
 
-            $id= $request->get('id');
+            $id = $request->get('id');
+
             return $this->redirectToRoute(
                 'user_profile',
                 [
-                    'id'=>$id
+                    'id' => $id,
                 ]
             );
         }
@@ -232,16 +222,16 @@ class UserController extends AbstractController
             'security/edit.html.twig',
             [
                 'form' => $form->createView(),
-                'user' => $user
+                'user' => $user,
             ]
         );
-
     }
+
     /**
      * Change password action.
      *
-     * @param Request  $request  HTTP request
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
@@ -264,9 +254,12 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
 
-            //$user->setRoles([UserRole::ROLE_USER->value]);
+
+
+            $user->setPassword($this->passwordHasher->hashPassword($user, $form->get('plain_password')->getNormData()));
+
+            // $user->setRoles([UserRole::ROLE_USER->value]);
             $this->userService->save($user);
 
             $this->addFlash(
@@ -274,11 +267,12 @@ class UserController extends AbstractController
                 $this->translator->trans('message.changed_successfully')
             );
 
-            $id= $request->get('id');
+            $id = $request->get('id');
+
             return $this->redirectToRoute(
                 'user_profile',
                 [
-                    'id'=>$id
+                    'id' => $id,
                 ]
             );
         }
@@ -287,19 +281,19 @@ class UserController extends AbstractController
             'security/edit.html.twig',
             [
                 'form' => $form->createView(),
-                'user' => $user
+                'user' => $user,
             ]
         );
-
     }
+
     #[Route(
         '/user/{id}/set_admin',
         requirements: ['id' => '[1-9]\d*'],
         name: 'set_admin',
         methods: 'GET|PUT'
     )]
-    public function setAdmin (User $user):Response{
-
+    public function setAdmin(User $user): Response
+    {
         $user->setRoles([UserRole::ROLE_USER->value, UserRole::ROLE_ADMIN->value]);
         $this->userService->save($user);
 
@@ -310,6 +304,7 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
+
     #[Route(
         '/user/{id}/revoke_admin',
         requirements: ['id' => '[1-9]\d*'],
@@ -323,6 +318,7 @@ class UserController extends AbstractController
                 'error',
                 $this->translator->trans('message.cannot_revoke_last_admin')
             );
+
             return $this->redirectToRoute('user_index');
         }
         $roles = $user->getRoles();
@@ -365,6 +361,4 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
-
-
 }

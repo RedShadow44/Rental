@@ -45,7 +45,7 @@ class PasswdType extends AbstractType
 //                ],
 //            ])
 
-            ->add('password', RepeatedType::class, [
+            ->add('plain_password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,
                 'invalid_message' => 'message.passwords_must_match',

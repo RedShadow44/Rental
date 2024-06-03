@@ -51,7 +51,7 @@ class AvatarType extends AbstractType
                 ),
             ]
         );
-    }
+    }// end buildForm()
 
     /**
      * Configures the options for this type.
@@ -61,7 +61,7 @@ class AvatarType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(['data_class' => Avatar::class]);
-    }
+    }// end configureOptions()
 
     /**
      * Returns the prefix of the template block name for this type.
@@ -74,5 +74,5 @@ class AvatarType extends AbstractType
     public function getBlockPrefix(): string
     {
         return 'avatar';
-    }
-}
+    }// end getBlockPrefix()
+}// end class
