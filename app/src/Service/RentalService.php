@@ -11,6 +11,7 @@ use App\Entity\Book;
 use App\Entity\Category;
 use App\Entity\Rental;
 use App\Entity\User;
+use App\Repository\BookRepository;
 use App\Repository\RentalRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -40,9 +41,65 @@ class RentalService implements RentalServiceInterface
      * @param RentalRepository $rentalRepository Task repository
      * @param PaginatorInterface $paginator Paginator
      */
-    public function __construct(private readonly RentalRepository $rentalRepository, private readonly PaginatorInterface $paginator)
+    public function __construct(private readonly RentalRepository $rentalRepository, private readonly BookRepository $bookRepository, private readonly PaginatorInterface $paginator)
     {
     }// end __construct()
+
+
+
+//    public function rentBook(Rental $rental): void
+//    {
+//        $book=$rental->getBook();
+//        $book->setAvailable(false);
+//
+//        $this->rentalRepository->save($rental);
+//        $this->bookRepository->save($book);
+//
+//
+//    }
+
+    /**
+     * Rent a book
+     *
+     * @param Book $book Book entity
+     * @param $user
+     *
+     * @return Rental Rental entity
+     */
+    public function rentBook(Book $book, $user):Rental
+    {
+        $rental = new Rental();
+        $rental->setOwner($user);
+        $rental->setBook($book);
+        $rental->setStatus(false);
+
+        $book->setAvailable(false);
+
+        $this->rentalRepository->save($rental);
+        $this->bookRepository->save($book);
+
+        return $rental;
+    }
+
+    /**
+     *
+     * Approve book rental
+     *
+     * @param Rental $rental
+     * @return void
+     */
+    public function approveRental(Rental $rental): void
+    {
+        $user = $rental->getOwner();
+
+        $rental->setStatus(true);
+
+        $book = $rental->getBook();
+        $book->setOwner($user);
+
+        $this->rentalRepository->save($rental);
+        $this->bookRepository->save($book);
+    }
 
     /**
      * Get paginated list.

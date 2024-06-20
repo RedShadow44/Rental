@@ -28,8 +28,11 @@
             </dd>
         </dl>
         <p>
-            <a class="btn btn-outline-primary" href="{{ url('user_edit', {id: user.id}) }}" title="{{ 'action.edit'|trans }}">
-                {{ 'action.edit'|trans }}
+            <a class="btn btn-outline-primary" href="{{ url('user_edit', {id: user.id}) }}" title="{{ 'action.edit_data'|trans }}">
+                {{ 'action.edit_data'|trans }}
+            </a>
+            <a class="btn btn-outline-primary" href="{{ url('user_edit_pass', {id: user.id}) }}" title="{{ 'action.edit_pass'|trans }}">
+                {{ 'action.edit_pass'|trans }}
             </a>
             <br>
             {% if 'ROLE_ADMIN' not in user.roles %}

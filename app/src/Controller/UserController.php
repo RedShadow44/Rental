@@ -110,6 +110,37 @@ class UserController extends AbstractController
     )]
     public function edit(Request $request, User $user): Response
     {
+//        $form = $this->createForm(
+//            UserType::class,
+//            $user,
+//            [
+//                'method' => 'PUT',
+//                'action' => $this->generateUrl('user_edit', ['id' => $user->getId()]),
+//            ]
+//        );
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+//
+//            $user->setRoles([UserRole::ROLE_USER->value]);
+//            $this->userService->save($user);
+//
+//            $this->addFlash(
+//                'success',
+//                $this->translator->trans('message.created_successfully')
+//            );
+//
+//            return $this->redirectToRoute('book_index');
+//        }
+//
+//        return $this->render(
+//            'security/edit.html.twig',
+//            [
+//                'form' => $form->createView(),
+//                'user' => $user,
+//            ]
+//        );
         $form = $this->createForm(
             UserType::class,
             $user,
@@ -121,17 +152,24 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+            //$user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
 
-            $user->setRoles([UserRole::ROLE_USER->value]);
+            // $user->setRoles([UserRole::ROLE_USER->value]);
             $this->userService->save($user);
 
             $this->addFlash(
                 'success',
-                $this->translator->trans('message.created_successfully')
+                $this->translator->trans('message.changed_successfully')
             );
 
-            return $this->redirectToRoute('book_index');
+            $id = $request->get('id');
+
+            return $this->redirectToRoute(
+                'user_index',
+                [
+                    'id' => $id,
+                ]
+            );
         }
 
         return $this->render(
@@ -142,6 +180,66 @@ class UserController extends AbstractController
             ]
         );
     }// end edit()
+
+    /**
+     * Edit password action.
+     *
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route(
+        'user/{id}/edit/pass',
+        name: 'user_edit_pass',
+        requirements: ['id' => '[1-9]\d*'],
+        methods: 'GET|PUT'
+    )]
+    public function editPass(Request $request, User $user): Response
+    {
+        $form = $this->createForm(
+            PasswdType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('user_edit_pass', ['id' => $user->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+
+            $user->setPassword($this->passwordHasher->hashPassword($user, $form->get('plain_password')->getNormData()));
+
+            // $user->setRoles([UserRole::ROLE_USER->value]);
+            $this->userService->save($user);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.changed_successfully')
+            );
+
+            $id = $request->get('id');
+
+            return $this->redirectToRoute(
+                'user_index',
+                [
+                    'id' => $id,
+                ]
+            );
+        }
+
+        return $this->render(
+            'security/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
+    }
+
 
     /**
      * Profile action.
@@ -198,7 +296,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+            //$user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
 
             // $user->setRoles([UserRole::ROLE_USER->value]);
             $this->userService->save($user);

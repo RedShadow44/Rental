@@ -1,0 +1,20 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block body %}#}
+{#    <h1>{{ 'label.approve_rental'| trans }}</h1>#}
+
+{#    {{ form_start(form) }}#}
+
+{#    {{ form_end(form) }}#}
+
+{#    <a href="{{ path('rent_index') }}">{{ 'action.back_to_list'|trans }}</a>#}
+{#{% endblock %}#}
+
+{% include 'default/_form2.html.twig' with {
+    page_title: 'title.confirm_rental'|trans,
+    form: form,
+    back_to_list_path: 'rent_index',
+} %}
+
+
+

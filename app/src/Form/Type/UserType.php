@@ -42,14 +42,14 @@ class UserType extends AbstractType
             ]
         );
 
-        $builder->add(
-            'password',
-            PasswordType::class,
-            [
-                'label'    => 'label.password',
-                'required' => true,
-            ]
-        );
+//        $builder->add(
+//            'password',
+//            PasswordType::class,
+//            [
+//                'label'    => 'label.password',
+//                'required' => true,
+//            ]
+//        );
 
     }
 
