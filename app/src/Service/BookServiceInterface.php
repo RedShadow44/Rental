@@ -51,4 +51,6 @@ interface BookServiceInterface
      * @param Book $book Book entity
      */
     public function delete(Book $book): void;
+
+    public function setAvailable(Book $book, bool $status):void;
 }// end interface

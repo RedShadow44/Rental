@@ -66,6 +66,11 @@
                             {{ 'message.approved'|trans }}
                         {% endif %}
                     </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ url('return', {id: rental.id}) }}" title="{{ 'action.return'|trans }}">
+                            {{ 'action.return'|trans }}
+                        </a>
+                    </td>
 
             {% endfor %}
             </tbody>

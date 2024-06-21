@@ -53,11 +53,12 @@
 {#               title="{{ 'action.rent'|trans }}" >#}
 {#                {{ 'action.rent'|trans }}#}
 {#            </a>#}
-
-            <a class="btn btn-primary" href="{{ url('rent', {id: book.id}) }}"
-               title="{{ 'action.rent'|trans }}" >
-                {{ 'action.rent'|trans }}
-            </a>
+            {% if not is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-primary" href="{{ url('rent', {id: book.id}) }}"
+                   title="{{ 'action.rent'|trans }}" >
+                    {{ 'action.rent'|trans }}
+                </a>
+            {% endif %}
 
         </p>
         {% endif %}

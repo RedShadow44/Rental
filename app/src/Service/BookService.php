@@ -128,4 +128,9 @@ class BookService implements BookServiceInterface
             null !== $filters->tagId ? $this->tagService->findOneById($filters->tagId) : null,
         );
     }
+
+    public function setAvailable (Book $book, bool $status ):void
+    {
+        $book->setAvailable($status);
+    }
 }// end class
