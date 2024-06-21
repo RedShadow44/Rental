@@ -1,4 +1,7 @@
 <?php
+/**
+ * Profile voter.
+ */
 
 namespace App\Security\Voter;
 
@@ -28,7 +31,7 @@ class ProfileVoter extends Voter
      */
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return in_array($attribute, [self::VIEW])
+        return self::VIEW === $attribute
             && $subject instanceof User;
     }
 

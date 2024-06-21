@@ -1,4 +1,7 @@
 <?php
+/**
+ * Tag service.
+ */
 
 namespace App\Service;
 

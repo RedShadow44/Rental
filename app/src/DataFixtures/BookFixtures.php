@@ -25,7 +25,7 @@ class BookFixtures extends AbstractBaseFixtures implements DependentFixtureInter
      */
     public function loadData(): void
     {
-        if (null === $this->manager || null === $this->faker) {
+        if (!$this->manager instanceof \Doctrine\Persistence\ObjectManager || !$this->faker instanceof \Faker\Generator) {
             return;
         }
 
@@ -45,7 +45,7 @@ class BookFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             $book->setCategory($category);
 
             /* @var Tag $tag */
-            for ($i = rand(1, 3); $i < 5; ++$i) {
+            for ($i = random_int(1, 3); $i < 5; ++$i) {
                 $tag = $this->getRandomReference('tags');
                 $book->addTag($tag);
             }

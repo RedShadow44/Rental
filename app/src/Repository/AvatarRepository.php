@@ -1,4 +1,7 @@
 <?php
+/**
+ * Avatar repository.
+ */
 
 namespace App\Repository;
 

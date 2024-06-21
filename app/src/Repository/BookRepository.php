@@ -1,4 +1,7 @@
 <?php
+/**
+ * Book repository.
+ */
 
 namespace App\Repository;
 

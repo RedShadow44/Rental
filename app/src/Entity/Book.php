@@ -1,4 +1,7 @@
 <?php
+/**
+ * Book entity.
+ */
 
 namespace App\Entity;
 

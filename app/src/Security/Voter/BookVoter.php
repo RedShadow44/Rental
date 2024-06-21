@@ -1,4 +1,7 @@
 <?php
+/**
+ * Book voter.
+ */
 
 namespace App\Security\Voter;
 

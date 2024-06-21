@@ -100,7 +100,7 @@ class CategoryService implements CategoryServiceInterface
         try {
             $result = $this->bookRepository->countByCategory($category);
 
-            return !($result > 0);
+            return $result <= 0;
         } catch (NoResultException|NonUniqueResultException) {
             return false;
         }

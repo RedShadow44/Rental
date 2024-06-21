@@ -1,4 +1,7 @@
 <?php
+/**
+ * Rental repository.
+ */
 
 namespace App\Repository;
 

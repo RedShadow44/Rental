@@ -99,7 +99,7 @@ class RentalController extends AbstractController
     public function approve(Request $request, Rental $rental, TranslatorInterface $translator, RentalServiceInterface $rentalService): Response
     {
         $form = $this->createFormBuilder()
-            ->setMethod('PUT')
+            ->setMethod(Request::METHOD_PUT)
             ->add('approve', SubmitType::class, [
                 'label' => $translator->trans('action.rent'),
                 'attr' => ['class' => 'btn btn-outline-primary w-100'],
@@ -139,7 +139,7 @@ class RentalController extends AbstractController
     public function deny(Request $request, Rental $rental, TranslatorInterface $translator): Response
     {
         $form = $this->createFormBuilder()
-            ->setMethod('PUT')
+            ->setMethod(Request::METHOD_PUT)
             ->add('deny', SubmitType::class, [
                 'label' => $translator->trans('action.deny'),
                 'attr' => ['class' => 'btn btn-outline-primary w-100'],

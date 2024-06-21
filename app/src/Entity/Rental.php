@@ -1,4 +1,7 @@
 <?php
+/**
+ * Rental entity.
+ */
 
 namespace App\Entity;
 

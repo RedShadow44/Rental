@@ -1,4 +1,7 @@
 <?php
+/**
+ * User controller.
+ */
 
 namespace App\Controller;
 

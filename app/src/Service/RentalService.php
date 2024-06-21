@@ -1,6 +1,6 @@
 <?php
 /**
- * Task service.
+ * Rental service.
  */
 
 namespace App\Service;

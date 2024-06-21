@@ -35,14 +35,14 @@ class Avatar
     #[ORM\OneToOne(inversedBy: 'avatar', targetEntity: User::class, cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\Type(User::class)]
-    private ?User $user;
+    private ?User $user = null;
 
     /**
      * Filename.
      */
     #[ORM\Column(type: 'string', length: 191)]
     #[Assert\Type('string')]
-    private ?string $filename;
+    private ?string $filename = null;
 
     /**
      * Getter for Id.
