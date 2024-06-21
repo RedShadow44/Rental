@@ -13,7 +13,6 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Service\Pagination;
 
 /**
  * Class BookRepository.
@@ -87,7 +86,6 @@ class BookRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
 
     /**
      * Save entity.

@@ -39,7 +39,8 @@ class BookController extends AbstractController
     /**
      * Index action.
      *
-     * @param int $page Page number
+     * @param BookListInputFiltersDto $filters Filters
+     * @param int                     $page    Page number
      *
      * @return Response HTTP response
      */
@@ -47,7 +48,7 @@ class BookController extends AbstractController
         name: 'book_index',
         methods: 'GET'
     )]
-    public function index(#[MapQueryString(resolver: BookListInputFiltersDtoResolver::class)] BookListInputFiltersDto $filters,#[MapQueryParameter] int $page = 1): Response
+    public function index(#[MapQueryString(resolver: BookListInputFiltersDtoResolver::class)] BookListInputFiltersDto $filters, #[MapQueryParameter] int $page = 1): Response
     {
         $pagination = $this->bookService->getPaginatedList($page, $filters);
 
@@ -82,7 +83,6 @@ class BookController extends AbstractController
      * @param Request $request HTTP request
      *
      * @return Response HTTP response
-     *
      */
     #[IsGranted('ROLE_ADMIN')]
     #[Route(

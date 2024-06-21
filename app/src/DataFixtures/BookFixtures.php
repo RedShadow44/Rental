@@ -45,18 +45,18 @@ class BookFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             $book->setCategory($category);
 
             /* @var Tag $tag */
-            for ($i = rand(1,3); $i < 5; $i++) {
+            for ($i = rand(1, 3); $i < 5; ++$i) {
                 $tag = $this->getRandomReference('tags');
                 $book->addTag($tag);
             }
 
             /* @var User $owner */
-//            for ($i = rand(1,2); $i < 2; $i++) {
-//                $owner = $this->getRandomReference('users');
-//                $book->setOwner($owner);
-//            }
+            //            for ($i = rand(1,2); $i < 2; $i++) {
+            //                $owner = $this->getRandomReference('users');
+            //                $book->setOwner($owner);
+            //            }
 
-//            $book ->setAvailable(false);
+            //            $book ->setAvailable(false);
 
             return $book;
         });

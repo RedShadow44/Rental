@@ -6,7 +6,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Task;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -19,15 +18,11 @@ class TaskFixtures extends Fixture
 {
     /**
      * Faker.
-     *
-     * @var Generator
      */
     protected Generator $faker;
 
     /**
      * Persistence object manager.
-     *
-     * @var ObjectManager
      */
     protected ObjectManager $manager;
 
@@ -44,10 +39,10 @@ class TaskFixtures extends Fixture
             $task = new Task();
             $task->setTitle($this->faker->sentence);
             $task->setCreatedAt(
-                DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
+                \DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
             );
             $task->setUpdatedAt(
-                DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
+                \DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-100 days', '-1 days'))
             );
             $manager->persist($task);
         }

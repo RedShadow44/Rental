@@ -31,7 +31,6 @@ class CategoryService implements CategoryServiceInterface
      */
     private const PAGINATOR_ITEMS_PER_PAGE = 10;
 
-
     /**
      * Constructor.
      *
@@ -39,7 +38,7 @@ class CategoryService implements CategoryServiceInterface
      * @param BookRepository     $bookRepository     Book repository
      * @param PaginatorInterface $paginator          Paginator
      */
-    public function __construct(private readonly CategoryRepository $categoryRepository,private readonly BookRepository $bookRepository, private readonly PaginatorInterface $paginator)
+    public function __construct(private readonly CategoryRepository $categoryRepository, private readonly BookRepository $bookRepository, private readonly PaginatorInterface $paginator)
     {
     }
 
@@ -69,12 +68,13 @@ class CategoryService implements CategoryServiceInterface
      */
     public function save(Category $category): void
     {
-//        if (null === $category->getId()) {
-//            $category->setCreatedAt(new \DateTimeImmutable());
-//        }
-//        $category->setUpdatedAt(new \DateTimeImmutable());
+        //        if (null === $category->getId()) {
+        //            $category->setCreatedAt(new \DateTimeImmutable());
+        //        }
+        //        $category->setUpdatedAt(new \DateTimeImmutable());
         $this->categoryRepository->save($category);
     }
+
     /**
      * Delete entity.
      *
@@ -87,6 +87,7 @@ class CategoryService implements CategoryServiceInterface
     {
         $this->categoryRepository->delete($category);
     }
+
     /**
      * Can Category be deleted?
      *

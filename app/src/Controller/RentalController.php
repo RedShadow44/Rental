@@ -28,11 +28,23 @@ class RentalController extends AbstractController
 {
     /**
      * Constructor.
+     *
+     * @param RentalServiceInterface $rentalService Rental service
+     * @param BookServiceInterface   $bookService   Book service
+     * @param TranslatorInterface    $translator    Translator
      */
     public function __construct(private readonly RentalServiceInterface $rentalService, private readonly BookServiceInterface $bookService, private readonly TranslatorInterface $translator)
     {
     }// end __construct()
 
+    /**
+     * Rent action.
+     *
+     * @param Request $request HTTP request
+     * @param Book    $book    Book entity
+     *
+     * @return Response HTTP response
+     */
     #[IsGranted('RENT', subject: 'book')]
     #[Route('/{id}/rent', name: 'rent', requirements: ['id' => '[1-9]\d*'], methods: 'GET|POST')]
     #[IsGranted('ROLE_USER')]
@@ -73,7 +85,12 @@ class RentalController extends AbstractController
     }
 
     /**
-     * Approve action.
+     * Approve rental.
+     *
+     * @param Request                $request       HTTP request
+     * @param Rental                 $rental        Rental entity
+     * @param TranslatorInterface    $translator    Translator
+     * @param RentalServiceInterface $rentalService Rental service
      *
      * @return Response HTTP response
      */
@@ -110,6 +127,12 @@ class RentalController extends AbstractController
 
     /**
      * Deny rental.
+     *
+     * @param Request             $request    HTTP request
+     * @param Rental              $rental     Rental entity
+     * @param TranslatorInterface $translator Translator
+     *
+     * @return Response HTTP response
      */
     #[Route('/{id}/rent_deny', name: 'rent_deny', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     #[IsGranted('ROLE_ADMIN')]
@@ -178,15 +201,12 @@ class RentalController extends AbstractController
                 $this->translator->trans('message.returned_successfully')
             );
 
-
-
             return $this->redirectToRoute(
                 'book_index',
-//                [
-//                    'id' => $this->getUser()->getId(),
-//                ]
+                //                [
+                //                    'id' => $this->getUser()->getId(),
+                //                ]
             );
-
         }
 
         return $this->render(
@@ -194,7 +214,7 @@ class RentalController extends AbstractController
             [
                 'form' => $form->createView(),
                 'rental' => $rental,
-//                'user_id' => $this->getUser()->getId(),
+                //                'user_id' => $this->getUser()->getId(),
             ]
         );
     }

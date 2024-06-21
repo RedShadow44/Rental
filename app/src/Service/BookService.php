@@ -47,7 +47,7 @@ class BookService implements BookServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int                     $page    Page number
      * @param BookListInputFiltersDto $filters Filters
      *
      * @return PaginationInterface<string, mixed> Paginated list
@@ -66,15 +66,11 @@ class BookService implements BookServiceInterface
     /**
      * Get paginated books for category.
      *
+     * @param int      $page     Page number
      * @param Category $category Category
-     * @param int $page Page number
      *
-     *  @return PaginationInterface<string, mixed> Paginated list
-    */
-//    public function findBooksForCategory(Category $category): array
-//    {
-//        return $this->bookRepository->findBooksForCategory($category);
-//    }// end findBooksForCategory()
+     * @return PaginationInterface<string, mixed> Paginated list
+     */
     public function getPaginatedBooksForCategory(int $page, Category $category): PaginationInterface
     {
         return $this->paginator->paginate(
@@ -94,10 +90,6 @@ class BookService implements BookServiceInterface
      */
     public function save(Book $book): void
     {
-        // if (null === $book->getId()) {
-        // $book->setCreatedAt(new \DateTimeImmutable());
-        // }
-        // $book->setUpdatedAt(new \DateTimeImmutable());
         $this->bookRepository->save($book);
     }// end save()
 
@@ -115,6 +107,20 @@ class BookService implements BookServiceInterface
     }// end delete()
 
     /**
+     * Set available action.
+     *
+     * @param Book $book   Book entity
+     * @param bool $status Status
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function setAvailable(Book $book, bool $status): void
+    {
+        $book->setAvailable($status);
+    }
+
+    /**
      * Prepare filters for the tasks list.
      *
      * @param BookListInputFiltersDto $filters Raw filters from request
@@ -127,10 +133,5 @@ class BookService implements BookServiceInterface
             null !== $filters->categoryId ? $this->categoryService->findOneById($filters->categoryId) : null,
             null !== $filters->tagId ? $this->tagService->findOneById($filters->tagId) : null,
         );
-    }
-
-    public function setAvailable (Book $book, bool $status ):void
-    {
-        $book->setAvailable($status);
     }
 }// end class

@@ -3,11 +3,12 @@
 namespace App\Security\Voter;
 
 use App\Entity\User;
-use App\Entity\Book;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * ProfileVoter class.
+ */
 class ProfileVoter extends Voter
 {
     /**
@@ -56,6 +57,4 @@ class ProfileVoter extends Voter
 
         return $authenticatedUser->getId() === $profileUser->getId();
     }
-
-
 }

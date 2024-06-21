@@ -67,9 +67,15 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{{ url('return', {id: rental.id}) }}" title="{{ 'action.return'|trans }}">
-                            {{ 'action.return'|trans }}
-                        </a>
+                        {% if rental.status == true %}
+                            <a class="btn btn-primary" href="{{ url('return', {id: rental.id}) }}" title="{{ 'action.return'|trans }}">
+                                {{ 'action.return'|trans }}
+                            </a>
+                        {% else %}
+                            <a class="btn btn-primary" href="{{ url('return', {id: rental.id}) }}" title="{{ 'action.cancel_rental'|trans }}">
+                                {{ 'action.cancel_rental'|trans }}
+                            </a>
+                        {% endif %}
                     </td>
 
             {% endfor %}

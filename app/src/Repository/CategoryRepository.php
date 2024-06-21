@@ -2,12 +2,11 @@
 /**
  * Category repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -50,7 +49,7 @@ class CategoryRepository extends ServiceEntityRepository
      */
     public function save(Category $category): void
     {
-        //assert($this->_em instanceof EntityManager);
+        // assert($this->_em instanceof EntityManager);
         $this->_em->persist($category);
         $this->_em->flush();
     }
@@ -65,7 +64,7 @@ class CategoryRepository extends ServiceEntityRepository
      */
     public function delete(Category $category): void
     {
-        //assert($this->_em instanceof EntityManager);
+        // assert($this->_em instanceof EntityManager);
         $this->_em->remove($category);
         $this->_em->flush();
     }
@@ -77,7 +76,7 @@ class CategoryRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('category');
     }

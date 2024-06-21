@@ -27,6 +27,7 @@ class BookType extends AbstractType
     public function __construct(private readonly TagsDataTransformer $tagsDataTransformer)
     {
     }
+
     /**
      * Builds the form.
      *

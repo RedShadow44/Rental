@@ -9,7 +9,6 @@ use App\Dto\BookListInputFiltersDto;
 use App\Entity\Book;
 use App\Entity\Category;
 use Knp\Component\Pager\Pagination\PaginationInterface;
-use Knp\Component\Pager\Paginator;
 
 /**
  * Interface BookServiceInterface.
@@ -19,7 +18,7 @@ interface BookServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int                     $page    Page number
      * @param BookListInputFiltersDto $filters Filters
      *
      * @return PaginationInterface<string, mixed> Paginated list
@@ -29,13 +28,11 @@ interface BookServiceInterface
     /**
      * Get paginated books for category.
      *
+     * @param int      $page     Page number
      * @param Category $category Category
-     * @param int $page Page number
      *
-     *  @return PaginationInterface<string, mixed> Paginated list
+     * @return PaginationInterface<string, mixed> Paginated list
      */
-//    public function findBooksForCategory(Category $category): array;
-
     public function getPaginatedBooksForCategory(int $page, Category $category): PaginationInterface;
 
     /**
@@ -52,5 +49,11 @@ interface BookServiceInterface
      */
     public function delete(Book $book): void;
 
-    public function setAvailable(Book $book, bool $status):void;
+    /**
+     * Set available action.
+     *
+     * @param Book $book   Book entity
+     * @param bool $status Status
+     */
+    public function setAvailable(Book $book, bool $status): void;
 }// end interface

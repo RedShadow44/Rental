@@ -23,8 +23,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/category')]
 class CategoryController extends AbstractController
 {
-
-
     /**
      * Constructor.
      *
@@ -34,14 +32,12 @@ class CategoryController extends AbstractController
      */
     public function __construct(private readonly CategoryServiceInterface $categoryService, private readonly BookServiceInterface $bookService, private readonly TranslatorInterface $translator)
     {
-
-    }//end __construct()
-
+    }// end __construct()
 
     /**
      * Index action.
      *
-     *  @param integer $page Page number
+     * @param int $page Page number
      *
      * @return Response HTTP response
      */
@@ -51,14 +47,13 @@ class CategoryController extends AbstractController
         $pagination = $this->categoryService->getPaginatedList($page);
 
         return $this->render('category/index.html.twig', ['pagination' => $pagination]);
-
-    }//end index()
-
+    }// end index()
 
     /**
      * Show action.
      *
      * @param Category $category Category
+     * @param int      $page     Page number
      *
      * @return Response HTTP response
      */
@@ -73,9 +68,7 @@ class CategoryController extends AbstractController
         $pagination = $this->bookService->getPaginatedBooksForCategory($page, $category);
 
         return $this->render('category/show.html.twig', ['category' => $category, 'pagination' => $pagination]);
-
-    }//end show()
-
+    }// end show()
 
     /**
      * Show books for category action.
@@ -95,7 +88,6 @@ class CategoryController extends AbstractController
     //
     // return $this->render('category/showAllBooksForCategory.html.twig', ['books'=>$books]);
     // }
-
 
     /**
      * Create action.
@@ -130,9 +122,7 @@ class CategoryController extends AbstractController
             'category/create.html.twig',
             ['form' => $form->createView()]
         );
-
-    }//end create()
-
+    }// end create()
 
     /**
      * Edit action.
@@ -178,9 +168,7 @@ class CategoryController extends AbstractController
                 'category' => $category,
             ]
         );
-
-    }//end edit()
-
+    }// end edit()
 
     /**
      * Delete action.
@@ -235,8 +223,5 @@ class CategoryController extends AbstractController
                 'category' => $category,
             ]
         );
-
-    }//end delete()
-
-
-}//end class
+    }// end delete()
+}// end class

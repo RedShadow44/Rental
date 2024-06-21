@@ -7,7 +7,6 @@ namespace App\Controller;
 
 use App\Entity\Tag;
 use App\Form\Type\TagType;
-use App\Service\TagService;
 use App\Service\TagServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -27,10 +26,9 @@ class TagController extends AbstractController
      * Constructor.
      *
      * @param TagServiceInterface $tagService Tag service
-     * @param TranslatorInterface  $translator  Translator
-     *
+     * @param TranslatorInterface $translator Translator
      */
-    public function __construct(private readonly TagServiceInterface $tagService,  private readonly TranslatorInterface $translator)
+    public function __construct(private readonly TagServiceInterface $tagService, private readonly TranslatorInterface $translator)
     {
     }
 
@@ -74,7 +72,7 @@ class TagController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'tag_create', methods: 'GET|POST', )]
+    #[Route('/create', name: 'tag_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
         $tag = new Tag();
@@ -96,7 +94,7 @@ class TagController extends AbstractController
             return $this->redirectToRoute('tag_index');
         }
 
-        return $this->render('tag/create.html.twig',  ['form' => $form->createView()]);
+        return $this->render('tag/create.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -144,7 +142,7 @@ class TagController extends AbstractController
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Tag    $tag    Tag entity
+     * @param Tag     $tag     Tag entity
      *
      * @return Response HTTP response
      */

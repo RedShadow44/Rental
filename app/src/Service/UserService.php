@@ -6,11 +6,8 @@
 namespace App\Service;
 
 use App\Repository\UserRepository;
-use App\Repository\BookRepository;
 use App\Entity\User;
 use Doctrine\ORM\Exception\ORMException;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -20,8 +17,6 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class UserService implements UserServiceInterface
 {
-
-
     /**
      * Items per page.
      *
@@ -33,12 +28,11 @@ class UserService implements UserServiceInterface
      */
     private const PAGINATOR_ITEMS_PER_PAGE = 10;
 
-
     /**
      * Constructor.
      *
-     * @param UserRepository     $userRepository     BUser repository
-     * @param PaginatorInterface $paginator          Paginator
+     * @param UserRepository     $userRepository BUser repository
+     * @param PaginatorInterface $paginator      Paginator
      */
     public function __construct(private readonly UserRepository $userRepository, private readonly PaginatorInterface $paginator)
     {
@@ -68,9 +62,7 @@ class UserService implements UserServiceInterface
     public function save(User $user): void
     {
         $this->userRepository->save($user);
-
     }
-
 
     /**
      * Delete entity.
@@ -83,13 +75,19 @@ class UserService implements UserServiceInterface
     public function delete(User $user): void
     {
         $this->userRepository->delete($user);
-
     }
 
+    /**
+     * Check if there is only last admin.
+     *
+     * @param User $user User entity
+     *
+     * @return bool Bool
+     */
     public function isLastAdmin(User $user): bool
     {
         $admins = $this->userRepository->findByRole('ROLE_ADMIN');
-        return count($admins) === 1 && $admins[0] === $user;
-    }
 
+        return 1 === count($admins) && $admins[0] === $user;
+    }
 }

@@ -5,10 +5,7 @@
 
 namespace App\Service;
 
-use App\Dto\BookListFiltersDto;
-use App\Dto\BookListInputFiltersDto;
 use App\Entity\Book;
-use App\Entity\Category;
 use App\Entity\Rental;
 use App\Entity\User;
 use App\Repository\BookRepository;
@@ -38,35 +35,23 @@ class RentalService implements RentalServiceInterface
     /**
      * Constructor.
      *
-     * @param RentalRepository $rentalRepository Task repository
-     * @param PaginatorInterface $paginator Paginator
+     * @param RentalRepository   $rentalRepository Rental repository
+     * @param BookRepository     $bookRepository   Book repository
+     * @param PaginatorInterface $paginator        Paginator
      */
     public function __construct(private readonly RentalRepository $rentalRepository, private readonly BookRepository $bookRepository, private readonly PaginatorInterface $paginator)
     {
     }// end __construct()
 
-
-
-//    public function rentBook(Rental $rental): void
-//    {
-//        $book=$rental->getBook();
-//        $book->setAvailable(false);
-//
-//        $this->rentalRepository->save($rental);
-//        $this->bookRepository->save($book);
-//
-//
-//    }
-
     /**
-     * Rent a book
+     * Rent a book.
      *
      * @param Book $book Book entity
-     * @param $user
+     * @param User $user User entity
      *
      * @return Rental Rental entity
      */
-    public function rentBook(Book $book, $user):Rental
+    public function rentBook(Book $book, User $user): Rental
     {
         $rental = new Rental();
         $rental->setOwner($user);
@@ -82,11 +67,9 @@ class RentalService implements RentalServiceInterface
     }
 
     /**
+     * Approve book rental.
      *
-     * Approve book rental
-     *
-     * @param Rental $rental
-     * @return void
+     * @param Rental $rental Rental entity
      */
     public function approveRental(Rental $rental): void
     {
@@ -110,7 +93,6 @@ class RentalService implements RentalServiceInterface
      */
     public function getPaginatedByStatus(int $page): PaginationInterface
     {
-
         return $this->paginator->paginate(
             $this->rentalRepository->queryByStatus(),
             $page,
@@ -121,13 +103,13 @@ class RentalService implements RentalServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int $page  Page number
+     * @param int $owner Owner id
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
     public function getPaginatedByOwner(int $page, int $owner): PaginationInterface
     {
-
         return $this->paginator->paginate(
             $this->rentalRepository->queryByOwner($owner),
             $page,
@@ -145,7 +127,6 @@ class RentalService implements RentalServiceInterface
      */
     public function save(Rental $rental): void
     {
-
         $this->rentalRepository->save($rental);
     }// end save()
 
@@ -161,5 +142,4 @@ class RentalService implements RentalServiceInterface
     {
         $this->rentalRepository->delete($rental);
     }// end delete()
-
 }

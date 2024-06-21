@@ -8,8 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use DateTimeImmutable;
-
 
 /**
  * Class Book.
@@ -69,7 +67,7 @@ class Book
      */
     #[ORM\Column(type: 'datetime_immutable')]
     #[Gedmo\Timestampable(on: 'create')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     private ?\DateTimeImmutable $createdAt = null;
 
     /**
@@ -79,7 +77,7 @@ class Book
      */
     #[ORM\Column(type: 'datetime_immutable')]
     #[Gedmo\Timestampable(on: 'update')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
@@ -97,6 +95,7 @@ class Book
     #[ORM\Column]
     #[Assert\NotBlank]
     private ?bool $available = true;
+
     /**
      * Constructor.
      */
@@ -193,7 +192,6 @@ class Book
     public function setCategory(?Category $category): void
     {
         $this->category = $category;
-
     }
 
     /**
@@ -235,6 +233,7 @@ class Book
     {
         $this->updatedAt = $updatedAt;
     }
+
     /**
      * Getter for tags.
      *
@@ -266,6 +265,7 @@ class Book
     {
         $this->tags->removeElement($tag);
     }
+
     /**
      * Getter for owner.
      *
@@ -275,6 +275,7 @@ class Book
     {
         return $this->owner;
     }
+
     /**
      * Setter for owner.
      *
@@ -283,17 +284,25 @@ class Book
     public function setOwner(?User $owner): void
     {
         $this->owner = $owner;
-
     }
 
+    /**
+     * Check available.
+     *
+     * @return bool|null Bool
+     */
     public function isAvailable(): ?bool
     {
         return $this->available;
     }
 
+    /**
+     * Setter for available.
+     *
+     * @param bool $available Bool
+     */
     public function setAvailable(bool $available): void
     {
         $this->available = $available;
-
     }
 }

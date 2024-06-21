@@ -15,17 +15,15 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TagRepository extends ServiceEntityRepository
 {
-
-
     /**
      * Constructor.
+     *
+     * @param ManagerRegistry $registry Manager registry
      */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Tag::class);
-
-    }//end __construct()
-
+    }// end __construct()
 
     /**
      * Query all records.
@@ -37,9 +35,7 @@ class TagRepository extends ServiceEntityRepository
         return $this->getOrCreateQueryBuilder()
             ->select('partial tag.{id, createdAt, updatedAt, title}')
             ->orderBy('tag.updatedAt', 'DESC');
-
-    }//end queryAll()
-
+    }// end queryAll()
 
     /**
      * Save entity.
@@ -51,9 +47,7 @@ class TagRepository extends ServiceEntityRepository
         assert($this->_em instanceof EntityManager);
         $this->_em->persist($tag);
         $this->_em->flush();
-
-    }//end save()
-
+    }// end save()
 
     /**
      * Delete entity.
@@ -68,9 +62,7 @@ class TagRepository extends ServiceEntityRepository
         assert($this->_em instanceof EntityManager);
         $this->_em->remove($tag);
         $this->_em->flush();
-
-    }//end delete()
-
+    }// end delete()
 
     /**
      * Get or create new query builder.
@@ -79,12 +71,10 @@ class TagRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder=null): QueryBuilder
+    private function getOrCreateQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
     {
-        return ($queryBuilder ?? $this->createQueryBuilder('tag'));
-
-    }//end getOrCreateQueryBuilder()
-
+        return $queryBuilder ?? $this->createQueryBuilder('tag');
+    }// end getOrCreateQueryBuilder()
 
     // **
     // * @return Tag[] Returns an array of Tag objects
@@ -109,4 +99,4 @@ class TagRepository extends ServiceEntityRepository
     // ->getOneOrNullResult()
     // ;
     // }
-}//end class
+}// end class

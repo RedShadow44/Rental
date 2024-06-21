@@ -8,6 +8,9 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * BookVoter class.
+ */
 class BookVoter extends Voter
 {
     /**
@@ -58,6 +61,7 @@ class BookVoter extends Voter
             default => false,
         };
     }
+
     /**
      * Checks if user can view book.
      *

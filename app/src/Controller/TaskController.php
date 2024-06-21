@@ -40,11 +40,8 @@ class TaskController extends AbstractController
         return $this->render('task/index.html.twig', ['pagination' => $pagination]);
     }
 
-
     /**
      * Show action.
-     *
-     * @param Task $task Task entity
      *
      * @return Response HTTP response
      */

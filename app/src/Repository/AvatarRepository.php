@@ -11,17 +11,15 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AvatarRepository extends ServiceEntityRepository
 {
-
-
     /**
      * Constructor.
+     *
+     * @param ManagerRegistry $registry Manager registry
      */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Avatar::class);
-
-    }//end __construct()
-
+    }// end __construct()
 
     /**
      * Save entity.
@@ -33,9 +31,7 @@ class AvatarRepository extends ServiceEntityRepository
         // assert($this->_em instanceof EntityManager);
         $this->_em->persist($avatar);
         $this->_em->flush();
-
-    }//end save()
-
+    }// end save()
 
     // **
     // * @return Avatar[] Returns an array of Avatar objects
@@ -60,4 +56,4 @@ class AvatarRepository extends ServiceEntityRepository
     // ->getOneOrNullResult()
     // ;
     // }
-}//end class
+}// end class

@@ -22,8 +22,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,8 +30,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Email.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
@@ -50,8 +46,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Password.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
@@ -168,6 +162,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
      * @see UserInterface
+     *
+     * @return null
      */
     public function getSalt(): ?string
     {
@@ -185,24 +181,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-
+    /**
+     * Check blocked.
+     *
+     * @return $this
+     */
     public function isBlocked(): ?bool
     {
         return $this->blocked;
     }
 
-    public function setBlocked(bool $blocked): static
+    /**
+     * Setter for blocked.
+     *
+     * @param bool $blocked Blocked
+     */
+    public function setBlocked(bool $blocked): void
     {
         $this->blocked = $blocked;
-
-        return $this;
     }
 
+    /**
+     * Getter for avatar.
+     *
+     * @return Avatar|null Avatar
+     */
     public function getAvatar(): ?Avatar
     {
         return $this->avatar;
     }
 
+    /**
+     * Setter for avatar.
+     *
+     * @param Avatar $avatar Avatar
+     *
+     * @return $this
+     */
     public function setAvatar(Avatar $avatar): static
     {
         // set the owning side of the relation if necessary

@@ -16,15 +16,30 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * Class UserController.
+ */
 class UserController extends AbstractController
 {
     /**
      * Constructor.
+     *
+     * @param UserServiceInterface        $userService    User service
+     * @param TranslatorInterface         $translator     Translator
+     * @param UserPasswordHasherInterface $passwordHasher Password hasher
+     * @param RentalServiceInterface      $rentalService  Rental service
      */
     public function __construct(private readonly UserServiceInterface $userService, private readonly TranslatorInterface $translator, private readonly UserPasswordHasherInterface $passwordHasher, private readonly RentalServiceInterface $rentalService)
     {
     }
 
+    /**
+     * Register action.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return Response HTTP response
+     */
     #[Route(
         '/register',
         name: 'register',
@@ -110,37 +125,6 @@ class UserController extends AbstractController
     )]
     public function edit(Request $request, User $user): Response
     {
-//        $form = $this->createForm(
-//            UserType::class,
-//            $user,
-//            [
-//                'method' => 'PUT',
-//                'action' => $this->generateUrl('user_edit', ['id' => $user->getId()]),
-//            ]
-//        );
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
-//
-//            $user->setRoles([UserRole::ROLE_USER->value]);
-//            $this->userService->save($user);
-//
-//            $this->addFlash(
-//                'success',
-//                $this->translator->trans('message.created_successfully')
-//            );
-//
-//            return $this->redirectToRoute('book_index');
-//        }
-//
-//        return $this->render(
-//            'security/edit.html.twig',
-//            [
-//                'form' => $form->createView(),
-//                'user' => $user,
-//            ]
-//        );
         $form = $this->createForm(
             UserType::class,
             $user,
@@ -152,9 +136,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //$user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
-
-            // $user->setRoles([UserRole::ROLE_USER->value]);
             $this->userService->save($user);
 
             $this->addFlash(
@@ -208,9 +189,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
-
             $user->setPassword($this->passwordHasher->hashPassword($user, $form->get('plain_password')->getNormData()));
 
             // $user->setRoles([UserRole::ROLE_USER->value]);
@@ -240,9 +218,13 @@ class UserController extends AbstractController
         );
     }
 
-
     /**
-     * Profile action.
+     * Profile.
+     *
+     * @param User $user User entity
+     * @param int  $page Page number
+     *
+     * @return Response HTTP response
      */
     #[Route(
         'profile/{id}',
@@ -252,11 +234,8 @@ class UserController extends AbstractController
     )]
     public function profile(User $user, #[MapQueryParameter] int $page = 1): Response
     {
-        // Check if the current user can view the profile
         $this->denyAccessUnlessGranted('view_profile', $user);
 
-        // Fetch the books owned by the user
-        // $books = $bookRepository->findBy(['owner' => $user]);
         $owner = $this->getUser()->getId();
         $pagination = $this->rentalService->getPaginatedByOwner($page, $owner);
 
@@ -296,8 +275,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //$user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
-
             // $user->setRoles([UserRole::ROLE_USER->value]);
             $this->userService->save($user);
 
@@ -352,9 +329,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
-
             $user->setPassword($this->passwordHasher->hashPassword($user, $form->get('plain_password')->getNormData()));
 
             // $user->setRoles([UserRole::ROLE_USER->value]);
@@ -384,6 +358,13 @@ class UserController extends AbstractController
         );
     }
 
+    /**
+     * Set admin action.
+     *
+     * @param User $user User entity
+     *
+     * @return Response HTTP response
+     */
     #[Route(
         '/user/{id}/set_admin',
         requirements: ['id' => '[1-9]\d*'],
@@ -403,6 +384,13 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_index');
     }
 
+    /**
+     * Revoke admin action.
+     *
+     * @param User $user User entity
+     *
+     * @return Response HTTP response
+     */
     #[Route(
         '/user/{id}/revoke_admin',
         requirements: ['id' => '[1-9]\d*'],
@@ -432,6 +420,13 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_index');
     }
 
+    /**
+     * Block user action.
+     *
+     * @param User $user User entity
+     *
+     * @return Response HTTP response
+     */
     #[Route('/user/{id}/block', name: 'user_block')]
     public function blockUser(User $user): Response
     {
@@ -446,6 +441,13 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_index');
     }
 
+    /**
+     * Unblock user action.
+     *
+     * @param User $user User entity
+     *
+     * @return Response HTTP response
+     */
     #[Route('/user/{id}/unblock', name: 'user_unblock')]
     public function unblockUser(User $user): Response
     {

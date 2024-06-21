@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Class Tag.
  *
@@ -20,8 +21,6 @@ class Tag
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -29,24 +28,18 @@ class Tag
     private ?int $id = null;
     /**
      * Created at.
-     *
-     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTimeImmutable $createdAt = null;
     /**
      * Updated at.
-     *
-     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
     private ?\DateTimeImmutable $updatedAt = null;
     /**
      * Title.
-     *
-     * @var string|null
      */
     #[ORM\Column(length: 64)]
     #[Assert\Type('string')]
@@ -55,12 +48,11 @@ class Tag
     private ?string $title = null;
     /**
      * Slug.
-     *
-     * @var string|null
      */
     #[ORM\Column(length: 64)]
     #[Gedmo\Slug(fields: ['title'])]
     private ?string $slug = null;
+
     /**
      * Getter for Id.
      *
@@ -70,6 +62,7 @@ class Tag
     {
         return $this->id;
     }
+
     /**
      * Getter for created at.
      *
@@ -79,6 +72,7 @@ class Tag
     {
         return $this->createdAt;
     }
+
     /**
      * Setter for created at.
      *
@@ -87,8 +81,8 @@ class Tag
     public function setCreatedAt(\DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
-
     }
+
     /**
      * Getter for updated at.
      *
@@ -98,6 +92,7 @@ class Tag
     {
         return $this->updatedAt;
     }
+
     /**
      * Setter for updated at.
      *
@@ -106,8 +101,8 @@ class Tag
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-
     }
+
     /**
      * Getter for title.
      *
@@ -117,6 +112,7 @@ class Tag
     {
         return $this->title;
     }
+
     /**
      * Setter for title.
      *
@@ -125,8 +121,8 @@ class Tag
     public function setTitle(string $title): void
     {
         $this->title = $title;
-
     }
+
     /**
      * Getter for slug.
      *
@@ -136,6 +132,7 @@ class Tag
     {
         return $this->slug;
     }
+
     /**
      * Setter for slug.
      *
@@ -144,6 +141,5 @@ class Tag
     public function setSlug(string $slug): void
     {
         $this->slug = $slug;
-
     }
 }
