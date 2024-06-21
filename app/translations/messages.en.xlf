@@ -460,6 +460,51 @@
         <target>Rent date</target>
      </trans-unit>
 
+     <trans-unit id="action.deny">
+        <source>action.deny</source>
+        <target>Deny</target>
+     </trans-unit>
+
+     <trans-unit id="message.returned_successfully">
+        <source>message.returned_successfully</source>
+        <target>Returned successfully</target>
+     </trans-unit>
+
+     <trans-unit id="action.edit_data">
+        <source>action.edit_data</source>
+        <target>Edit data</target>
+     </trans-unit>
+
+     <trans-unit id="action.edit_pass">
+        <source>action.edit_pass</source>
+        <target>Edit password</target>
+     </trans-unit>
+
+     <trans-unit id="title.deny_rental">
+        <source>title.deny_rental</source>
+        <target>Deny rental</target>
+     </trans-unit>
+
+     <trans-unit id="title.confirm_rental">
+        <source>title.confirm_rental</source>
+        <target>Confirm rental</target>
+     </trans-unit>
+
+     <trans-unit id="title.return_book">
+        <source>title.return_book</source>
+        <target>Return book</target>
+     </trans-unit>
+
+     <trans-unit id="action.return">
+        <source>action.return</source>
+        <target>Return</target>
+     </trans-unit>
+
+     <trans-unit id="action.cancel_rental">
+        <source>action.cancel_rental</source>
+        <target>Cancel rental</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->
