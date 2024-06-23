@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 /**
  * Class UserController.
@@ -364,7 +365,8 @@ class UserController extends AbstractController
     /**
      * Set admin action.
      *
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
@@ -374,23 +376,53 @@ class UserController extends AbstractController
         name: 'set_admin',
         methods: 'GET|PUT'
     )]
-    public function setAdmin(User $user): Response
+    public function setAdmin(Request $request, User $user): Response
     {
-        $user->setRoles([UserRole::ROLE_USER->value, UserRole::ROLE_ADMIN->value]);
-        $this->userService->save($user);
-
-        $this->addFlash(
-            'success',
-            $this->translator->trans('message.created_successfully')
+        //        $user->setRoles([UserRole::ROLE_USER->value, UserRole::ROLE_ADMIN->value]);
+        //        $this->userService->save($user);
+        //
+        //        $this->addFlash(
+        //            'success',
+        //            $this->translator->trans('message.created_successfully')
+        //        );
+        //
+        //        return $this->redirectToRoute('user_index');
+        $form = $this->createForm(
+            FormType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('set_admin', ['id' => $user->getId()]),
+            ]
         );
 
-        return $this->redirectToRoute('user_index');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+            $this->userService->save($user);
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.created_successfully')
+            );
+
+            return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
+        }
+
+        return $this->render(
+            'security/promote.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
     }
 
     /**
      * Revoke admin action.
      *
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
@@ -400,68 +432,137 @@ class UserController extends AbstractController
         name: 'revoke_admin',
         methods: ['GET', 'PUT']
     )]
-    public function revokeAdmin(User $user): Response
+    public function revokeAdmin(Request $request, User $user): Response
     {
         if ($this->userService->isLastAdmin($user)) {
             $this->addFlash(
-                'error',
+                'warning',
                 $this->translator->trans('message.cannot_revoke_last_admin')
             );
 
             return $this->redirectToRoute('user_index');
         }
-        $roles = $user->getRoles();
-        $updatedRoles = array_diff($roles, [UserRole::ROLE_ADMIN->value]);
-        $user->setRoles($updatedRoles);
-        $this->userService->save($user);
-
-        $this->addFlash(
-            'success',
-            $this->translator->trans('message.role_revoked_successfully')
+        //        $roles = $user->getRoles();
+        //        $updatedRoles = array_diff($roles, [UserRole::ROLE_ADMIN->value]);
+        //        $user->setRoles($updatedRoles);
+        //        $this->userService->save($user);
+        //
+        //        $this->addFlash(
+        //            'success',
+        //            $this->translator->trans('message.role_revoked_successfully')
+        //        );
+        //
+        //        return $this->redirectToRoute('user_index');
+        $form = $this->createForm(
+            FormType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('revoke_admin', ['id' => $user->getId()]),
+            ]
         );
 
-        return $this->redirectToRoute('user_index');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setRoles(['ROLE_USER']);
+            $this->userService->save($user);
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.created_successfully')
+            );
+
+            return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
+        }
+
+        return $this->render(
+            'security/demote.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
     }
 
     /**
      * Block user action.
      *
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
     #[Route('/user/{id}/block', name: 'user_block')]
-    public function blockUser(User $user): Response
+    public function blockUser(Request $request, User $user): Response
     {
-        $user->setBlocked(true);
-        $this->userService->save($user);
-
-        $this->addFlash(
-            'success',
-            $this->translator->trans('message.user_blocked_successfully')
+        $form = $this->createForm(
+            FormType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('user_block', ['id' => $user->getId()]),
+            ]
         );
 
-        return $this->redirectToRoute('user_index');
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setBlocked(true);
+            $this->userService->save($user);
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.user_blocked_successfully')
+            );
+
+            return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
+        }
+
+        return $this->render(
+            'security/block.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
     }
 
     /**
      * Unblock user action.
      *
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
     #[Route('/user/{id}/unblock', name: 'user_unblock')]
-    public function unblockUser(User $user): Response
+    public function unblockUser(Request $request, User $user): Response
     {
-        $user->setBlocked(false);
-        $this->userService->save($user);
-
-        $this->addFlash(
-            'success',
-            $this->translator->trans('message.user_unblocked_successfully')
+        $form = $this->createForm(
+            FormType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('user_unblock', ['id' => $user->getId()]),
+            ]
         );
 
-        return $this->redirectToRoute('user_index');
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setBlocked(false);
+            $this->userService->save($user);
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.user_unblocked_successfully')
+            );
+
+            return $this->redirectToRoute('user_show', ['id' => $user->getId()]);
+        }
+
+        return $this->render(
+            'security/unblock.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
     }
 }

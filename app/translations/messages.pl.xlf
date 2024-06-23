@@ -505,6 +505,31 @@
         <target>Anuluj wypożyczenie</target>
      </trans-unit>
 
+     <trans-unit id="message.blocked_account">
+        <source>message.blocked_account</source>
+        <target>Twoje konto jest zablokowane</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_unblock">
+        <source>title.user_unblock</source>
+        <target>Odblokuj użytkownika</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_block">
+        <source>title.user_block</source>
+        <target>Zablokuj użytkownika</target>
+     </trans-unit>
+
+     <trans-unit id="title.revoke_admin">
+        <source>title.revoke_admin</source>
+        <target>Odbierz administratora</target>
+     </trans-unit>
+
+     <trans-unit id="title.set_admin">
+        <source>title.set_admin</source>
+        <target>Nadaj administratora</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

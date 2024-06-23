@@ -505,6 +505,31 @@
         <target>Cancel rental</target>
      </trans-unit>
 
+     <trans-unit id="message.blocked_account">
+        <source>message.blocked_account</source>
+        <target>Your account is blocked</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_unblock">
+        <source>title.user_unblock</source>
+        <target>Unblock user</target>
+     </trans-unit>
+
+     <trans-unit id="title.user_block">
+        <source>title.user_block</source>
+        <target>Block user</target>
+     </trans-unit>
+
+     <trans-unit id="title.revoke_admin">
+        <source>title.revoke_admin</source>
+        <target>Revoke admin</target>
+     </trans-unit>
+
+     <trans-unit id="title.set_admin">
+        <source>title.set_admin</source>
+        <target>Set admin</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->
