@@ -1,4 +1,4 @@
-p {
-    color: black;
-    font-weight: bold;
+.small-avatar {
+    width: 30px; /* Set the desired width */
+    height: 30px; /* Set the desired height */
 }

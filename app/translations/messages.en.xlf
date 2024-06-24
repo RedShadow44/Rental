@@ -530,6 +530,26 @@
         <target>Set admin</target>
      </trans-unit>
 
+     <trans-unit id="action.searchTitle">
+        <source>action.searchTitle</source>
+        <target>Search by title</target>
+     </trans-unit>
+
+     <trans-unit id="message.invalid_characters">
+        <source>message.invalid_characters</source>
+        <target>Invalid characters</target>
+     </trans-unit>
+
+     <trans-unit id="action.searchAuthor">
+        <source>action.searchAuthor</source>
+        <target>Search by author</target>
+     </trans-unit>
+
+     <trans-unit id="action.search">
+        <source>action.search</source>
+        <target>Search</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

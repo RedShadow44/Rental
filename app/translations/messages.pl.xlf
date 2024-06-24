@@ -530,6 +530,26 @@
         <target>Nadaj administratora</target>
      </trans-unit>
 
+     <trans-unit id="action.searchTitle">
+        <source>action.searchTitle</source>
+        <target>Szukaj tytuł </target>
+     </trans-unit>
+
+     <trans-unit id="message.invalid_characters">
+        <source>message.invalid_characters</source>
+        <target>Niepoprawne znaki</target>
+     </trans-unit>
+
+     <trans-unit id="action.searchAuthor">
+        <source>action.searchAuthor</source>
+        <target>Szukaj autora</target>
+     </trans-unit>
+
+     <trans-unit id="action.search">
+        <source>action.search</source>
+        <target>Szukaj</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

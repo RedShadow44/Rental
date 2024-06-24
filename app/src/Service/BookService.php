@@ -132,6 +132,8 @@ class BookService implements BookServiceInterface
         return new BookListFiltersDto(
             null !== $filters->categoryId ? $this->categoryService->findOneById($filters->categoryId) : null,
             null !== $filters->tagId ? $this->tagService->findOneById($filters->tagId) : null,
+            $filters->titleSearch,
+            $filters->authorSearch
         );
     }
 }// end class

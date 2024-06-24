@@ -35,7 +35,7 @@ class AvatarType extends AbstractType
             FileType::class,
             [
                 'mapped' => false,
-                'label' => 'label.avatar',
+                //                'label' => 'label.avatar',
                 'required' => true,
                 'constraints' => new Image(
                     [

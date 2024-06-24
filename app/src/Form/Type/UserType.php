@@ -1,6 +1,6 @@
 <?php
 /**
- * Registration type.
+ * User type.
  */
 
 namespace App\Form\Type;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class RegistrationType.
+ * Class UserType.
  */
 class UserType extends AbstractType
 {

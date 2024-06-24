@@ -33,7 +33,9 @@ class BookListInputFiltersDtoResolver implements ValueResolverInterface
 
         $categoryId = $request->query->get('categoryId');
         $tagId = $request->query->get('tagId');
+        $titleSearch = $request->query->get('titleSearch') ?? null;
+        $authorSearch = $request->query->get('authorSearch') ?? null;
 
-        return [new BookListInputFiltersDto($categoryId, $tagId)];
+        return [new BookListInputFiltersDto($categoryId, $tagId, $titleSearch, $authorSearch)];
     }
 }

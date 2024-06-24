@@ -46,7 +46,7 @@
 {#                        <a class="navbar-brand" >{{ app.user.email }}</a>#}
 
                         {% if app.user.avatar.filename is defined and app.user.avatar.filename|length %}
-                            <img class="nav-profile-img" src="{{ asset(avatars_directory~app.user.avatar.filename) }}">
+                            <img class="nav-profile-img img-thumbnail w-25 h-25 rounded-circle" src="{{ asset(avatars_directory~app.user.avatar.filename) }}">
                         {% endif %}
 
                         <a class="navbar-brand" href="{{ url('user_profile', {id: app.user.id}) }}">{{ app.user.email }}</a>

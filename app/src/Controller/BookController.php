@@ -8,6 +8,7 @@ namespace App\Controller;
 use App\Dto\BookListInputFiltersDto;
 use App\Entity\Book;
 use App\Form\Type\BookType;
+use App\Form\Type\SearchType;
 use App\Resolver\BookListInputFiltersDtoResolver;
 use App\Service\BookServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,6 +40,7 @@ class BookController extends AbstractController
     /**
      * Index action.
      *
+     * @param Request                 $request HTTP request
      * @param BookListInputFiltersDto $filters Filters
      * @param int                     $page    Page number
      *
@@ -48,11 +50,19 @@ class BookController extends AbstractController
         name: 'book_index',
         methods: 'GET'
     )]
-    public function index(#[MapQueryString(resolver: BookListInputFiltersDtoResolver::class)] BookListInputFiltersDto $filters, #[MapQueryParameter] int $page = 1): Response
+    public function index(Request $request, #[MapQueryString(resolver: BookListInputFiltersDtoResolver::class)] BookListInputFiltersDto $filters, #[MapQueryParameter] int $page = 1): Response
     {
+        $form = $this->createForm(
+            SearchType::class,
+            [
+                'method' => 'GET',
+            ]
+        );
+        $form->handleRequest($request);
+
         $pagination = $this->bookService->getPaginatedList($page, $filters);
 
-        return $this->render('book/index.html.twig', ['pagination' => $pagination]);
+        return $this->render('book/index.html.twig', ['pagination' => $pagination, 'form' => $form->createView()]);
     }// end index()
 
     /**
