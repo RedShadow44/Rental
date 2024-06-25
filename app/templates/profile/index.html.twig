@@ -29,7 +29,7 @@
 {#                {{ 'action.avatar_edit'|trans }}#}
 {#            </a>#}
         </p>
-
+    {% if not is_granted('ROLE_ADMIN') %}
         <h3>{{ 'label.books_owned'|trans }}</h3>
         {% if pagination is defined and pagination.items|length %}
 
@@ -90,6 +90,7 @@
                 {{ 'message.empty_list'|trans }}
             </p>
         {% endif %}
+    {% endif %}
 
         <p>
             <a href="{{ url('book_index') }}" title="{{ 'action.back_to_list'|trans }}">

@@ -90,7 +90,6 @@ class AvatarController extends AbstractController
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Avatar  $avatar  Avatar entity
      *
      * @return Response HTTP response
      */
@@ -100,13 +99,15 @@ class AvatarController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET|PUT'
     )]
-    public function edit(Request $request, Avatar $avatar): Response
+    public function edit(Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();
         if (!$user->getAvatar()) {
             return $this->redirectToRoute('avatar_create');
         }
+
+        $avatar = $user->getAvatar();
 
         $form = $this->createForm(
             AvatarType::class,
@@ -132,7 +133,7 @@ class AvatarController extends AbstractController
                 $this->translator->trans('message.edited_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('book_index');
         }
 
         return $this->render(
