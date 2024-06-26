@@ -550,6 +550,11 @@
         <target>Szukaj</target>
      </trans-unit>
 
+     <trans-unit id="label.repeatPassword">
+        <source>label.repeatPassword</source>
+        <target>Powtórz hasło</target>
+     </trans-unit>
+
 <!--      <trans-unit id=""> -->
 <!--         <source></source> -->
 <!--         <target></target> -->

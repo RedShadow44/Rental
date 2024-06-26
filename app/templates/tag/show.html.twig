@@ -11,9 +11,9 @@
             <dt>{{ 'label.id'|trans }}</dt>
             <dd>{{ tag.id }}</dd>
             <dt>{{ 'label.created_at'|trans }}</dt>
-            <dd>{{ tag.createdAt|date('Y/m/d') }}</dd>
+            <dd>{{ tag.createdAt|format_date('long') }}</dd>
             <dt>{{ 'label.updated_at'|trans }}</dt>
-            <dd>{{ tag.updatedAt|date('Y/m/d') }}</dd>
+            <dd>{{ tag.updatedAt|format_date('long') }}</dd>
             <dt>{{ 'label.title'|trans }}</dt>
             <dd>{{  tag.title }}</dd>
         </dl>

@@ -12,12 +12,25 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Password Type.
  */
 class PasswdType extends AbstractType
 {
+    public $translator;
+
+    /**
+     * Constructor.
+     *
+     * @param TranslatorInterface $translator Translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * Builds the form.
      *
@@ -48,8 +61,8 @@ class PasswdType extends AbstractType
                 'invalid_message' => 'message.passwords_must_match',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => $this->translator->trans('label.password')],
+                'second_options' => ['label' => $this->translator->trans('label.repeatPassword')],
             ]);
     }
 

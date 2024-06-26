@@ -1,5 +1,5 @@
 
-Found 0 of 55 files that can be fixed in 2.450 seconds, 18.00 MB memory used
+Found 0 of 55 files that can be fixed in 1.921 seconds, 18.00 MB memory used
  ------- -------- ---- ---------------------- 
   State   Domain   Id   Message Preview (en)  
  ------- -------- ---- ---------------------- 
@@ -9,9 +9,9 @@ Found 0 of 55 files that can be fixed in 2.450 seconds, 18.00 MB memory used
  ------- -------- ---- ---------------------- ------------------------------- 
 
 [notice] Migrating up to DoctrineMigrations\Version20240621141021
-[notice] finished in 9220.4ms, used 24M memory, 16 migrations executed, 28 sql queries
+[notice] finished in 6284.5ms, used 24M memory, 16 migrations executed, 28 sql queries
 
- [OK] Successfully migrated to version: DoctrineMigrations\Version20240621141021                                        
+ [OK] Successfully migrated to version: DoctrineMigrations\Version20240621141021                                       
 
 
    > purging database
